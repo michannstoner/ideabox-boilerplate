@@ -28,4 +28,21 @@ main {
 .card-display {
   width: 100%;
   height: 47em;
+  background-color: #EAEAF4;
+}
+
+.card-container {
+
+}
+
+.star-inactive {
+  width: 2em;
+}
+
+.card-delete {
+  width: 2em;
+}
+
+.comment-img {
+  width: 2em;
 }
