@@ -1,6 +1,4 @@
-* {
-  border: 1px solid red
-  }
+
 /* ***** GLOBAL RULES ***** */
 body {
   display: flex;
@@ -34,6 +32,7 @@ main {
 .card-container {
   width: 18em;
   height: 21em;
+  /* border-color: #1F1F3D; */
 }
 
 .card-header {
@@ -50,12 +49,38 @@ main {
 
 .body-container {
   height: 16em;
-  color: #1F1F3D;
   background-color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  padding: 1em 0 0 1em;
+  border: 2px solid;
+  border-color: #1F1F3D;
+}
+
+h2 {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.card-body {
+  height: 12em;
+  font-size: 1.2em;
 }
 
 .comment-container {
   display: flex;
   color: #E9E9F3;
   background-color: #5356A4;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+  border-color: #1F1F3D;
+}
+
+.comment-tag {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.visibility-hidden {
+  display: none; 
 }
