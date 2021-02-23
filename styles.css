@@ -1,7 +1,8 @@
-* {
+ /* * {
   border: 1px solid red
-  }
-/* ***** GLOBAL RULES ***** */
+  } */
+
+ /* ***** GLOBAL RULES ***** */
 body {
   display: flex;
   justify-content: center;
@@ -28,6 +29,52 @@ main {
   height: 35em;
   background-color: #A9AAD2;
   font-family: open sans;
+}
+
+.title-container,
+.body-container,
+.save-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  color: #1F1F3D
+}
+
+.search-container {
+  display: flex;
+}
+
+.input-title,
+.input-body,
+.input-search,
+.search-icon {
+  height: 3em;
+  width: 30em;
+  border-radius: 3px;
+  border: 2px solid #5356A4;
+}
+
+.input-body {
+  height: 6em;
+}
+
+.save-button {
+  width: 22.5em;
+  height: 2.5em;
+  background-color: #1F1F3D;
+  color: #FFFFFF;
+  border-radius: 3px;
+  border: 2px solid #5356A4;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.search-icon {
+  height: 1em;
+  width: 1em;
+  background-color: #1F1F3D;
+  padding: 3%;
 }
 
 /* ***** CARD DISPLAY ***** */
