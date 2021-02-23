@@ -32,17 +32,30 @@ main {
 }
 
 .card-container {
-
+  width: 18em;
+  height: 21em;
 }
 
-.star-inactive {
-  width: 2em;
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1F1F3D;
 }
 
-.card-delete {
-  width: 2em;
-}
-
+.star-inactive,
+.card-delete,
 .comment-img {
   width: 2em;
+}
+
+.body-container {
+  height: 16em;
+  color: #1F1F3D;
+  background-color: #FFFFFF;
+}
+
+.comment-container {
+  display: flex;
+  color: #E9E9F3;
+  background-color: #5356A4;
 }
