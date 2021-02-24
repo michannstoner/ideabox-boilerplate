@@ -10,11 +10,31 @@ body {
 }
 /* ***** SIDEBAR ***** */
 .sidebar {
+  background-color: #1F1F3D;
+  font-family: 'Open Sans', sans-serif;
   width: 40em;
   height: 85em;
-  background-color: #1F1F3D;
-  color: #FFFFFF;
-  font-family: 'Open Sans', sans-serif;
+}
+h1 {
+  color: #E9E9F3;
+}
+
+.line-divider {
+  border-bottom: 2px solid;
+  border-color: #353567;
+}
+
+.filter-title {
+  color: #BFBFDD
+}
+
+.sidebar-button {
+  background-color: #5356A4;
+  color:#E9E9F3;
+  padding: .5em 1em;
+  font-size: 1em;
+  font-weight: 700;
+  border: none;
 }
 
 /* ***** MAIN PAGE ***** */
