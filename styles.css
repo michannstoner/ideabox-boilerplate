@@ -34,6 +34,7 @@ main {
 .title-container,
 .body-container,
 .save-button {
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,39 +44,57 @@ main {
 
 .search-container {
   display: flex;
+  border-radius: 3px;
+  border: 2px solid #5356A4;
 }
 
 .input-title,
-.input-body,
-.input-search,
-.search-icon {
-  height: 3em;
+.input-body {
+  margin-top: .5em;
+  height: 3.5em;
   width: 30em;
   border-radius: 3px;
   border: 2px solid #5356A4;
 }
 
 .input-body {
-  height: 6em;
+  height: 8em;
 }
 
 .save-button {
-  width: 22.5em;
-  height: 2.5em;
-  background-color: #1F1F3D;
+  width: 20.50em;
+  height: 2.75em;
+  background-color: #353667;
   color: #FFFFFF;
   border-radius: 3px;
   border: 2px solid #5356A4;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
+  align-self: center;
 }
 
 .search-icon {
-  height: 1em;
-  width: 1em;
-  background-color: #1F1F3D;
+  height: 1.65em;
+  width: 1.65em;
+  background-color: #353667;
   padding: 3%;
+  border-radius: 3px;
+  border: .5px solid #353667;
 }
+
+.input-search {
+  width: 25.75em;
+  height: 3.5em;
+}
+
+::placeholder {
+  font-family: open sans, bold;
+  font-size: 16px;
+  color: #353667;
+  padding-left: 3%;
+}
+
+
 
 /* ***** CARD DISPLAY ***** */
 .card-display {
