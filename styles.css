@@ -49,7 +49,7 @@ main {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 35em;
+  height: 30em;
   background-color: #A9AAD2;
   font-family: open sans, bold;
 }
@@ -62,12 +62,13 @@ main {
   justify-content: center;
   font-size: 16px;
   font-weight: bold;
-  color: #1F1F3D
+  color: #1F1F3D;
+  margin-top: 1em;
 }
 
 .search-container {
   display: flex;
-  margin-top: 4%;
+  margin-top: 2em;
 }
 
 .input-title,
@@ -91,9 +92,7 @@ label {
 }
 
 .save-button {
-  display: flex;
   align-items: center;
-  text-align: center;
   width: 20.50em;
   height: 2.75em;
   background-color: #353667;
@@ -102,8 +101,7 @@ label {
   border: 2px solid #5356A4;
   font-weight: bold;
   font-size: 20px;
-  align-self: center;
-  margin-top: 4%;
+  margin-top: 2em;
 }
 
 .search-icon {
@@ -136,7 +134,7 @@ label {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 50em;
+  height: 55em;
   background-color: #EAEAF4;
 }
 
@@ -147,6 +145,7 @@ label {
   width: 76em;
   height: 100%;
   margin-top: 3em;
+  overflow-y: auto;
 }
 
 .card-container {
@@ -154,7 +153,6 @@ label {
   height: 23em;
   margin: 1em 1em;
 }
-
 
 .card-header {
   display: flex;
