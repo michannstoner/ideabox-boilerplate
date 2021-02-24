@@ -1,3 +1,6 @@
+* {
+  /* border: 1px solid red */
+  }
 
 /* ***** GLOBAL RULES ***** */
 body {
@@ -8,7 +11,10 @@ body {
 /* ***** SIDEBAR ***** */
 .sidebar {
   width: 40em;
-  height: 100%;
+  height: 85em;
+  background-color: #1F1F3D;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /* ***** MAIN PAGE ***** */
@@ -24,16 +30,28 @@ main {
 
 /* ***** CARD DISPLAY ***** */
 .card-display {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 47em;
   background-color: #EAEAF4;
 }
 
+.card-placement {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 76em;
+  height: 100%;
+  margin-top: 3em;
+}
+
 .card-container {
   width: 18em;
-  height: 21em;
-  /* border-color: #1F1F3D; */
+  height: 23em;
+  margin: 1em 1em;
 }
+
 
 .card-header {
   display: flex;
