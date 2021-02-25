@@ -2,7 +2,7 @@ class Idea {
   constructor(title, body) {
     this.title = title;
     this.body = body;
-    // this.id = id;
+    this.id = Date.now();
     this.isStarred = false;
   }
   saveToStorage() {
