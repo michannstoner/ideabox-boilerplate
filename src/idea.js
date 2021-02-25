@@ -1,8 +1,8 @@
 class Idea {
-  constructor(title, body, id) {
+  constructor(title, body) {
     this.title = title;
     this.body = body;
-    this.id = id;
+    // this.id = id;
     this.isStarred = false;
   }
   saveToStorage() {
