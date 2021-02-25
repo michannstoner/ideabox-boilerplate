@@ -3,6 +3,7 @@ var formTitle = document.querySelector('.input-title');
 var formBody = document.querySelector('.input-body');
 var cardContainer = document.querySelector('.card-placement');
 var errorButton = document.querySelector('.save-button-validation');
+var deleteButton = document.querySelector('.card-delete');
 
 saveButton.addEventListener('click', function(event){
   event.preventDefault();
@@ -13,6 +14,11 @@ errorButton.addEventListener('click', function(event){
   event.preventDefault();
   createCard();
 });
+
+deleteButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  deleteCard();
+})
 
 function createCard() {
   var userTitle = formTitle.value;
@@ -27,7 +33,8 @@ function createCard() {
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
           <img src="./assets/star-active.svg" class="star-active visibility-hidden">
-          <img src="./assets/delete.svg" class="card-delete">
+          <img src="./assets/delete.svg" class="card-delete-inactive">
+          <img src="./assets/delete-active.svg" class="card-delete-active visibility-hidden">
         </div>
         <div class="body-container">
           <h2>${newCard.title}</h2>
@@ -68,5 +75,10 @@ function show(element) {
 
 function hide(element) {
   element.classList.add('visibility-hidden');
+}
+
+function deleteCard() {
+  
+
 }
 
