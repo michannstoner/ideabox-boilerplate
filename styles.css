@@ -56,7 +56,8 @@ main {
 
 .title-container,
 .form-body-container,
-.save-button {
+.save-button,
+.save-button-validation {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,17 +92,27 @@ label {
   margin-top: 4%;
 }
 
-.save-button {
+.save-button,
+.save-button-validation {
   align-items: center;
   width: 20.50em;
   height: 2.75em;
-  background-color: #353667;
+
   color: #FFFFFF;
   border-radius: 3px;
   border: 2px solid #5356A4;
   font-weight: bold;
   font-size: 20px;
   margin-top: 2em;
+}
+
+.save-button {
+  background-color: #353667;
+}
+
+.save-button-validation {
+  background-color: #90EE90;
+  cursor: s-resize;
 }
 
 .search-icon {
