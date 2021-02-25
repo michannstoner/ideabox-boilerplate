@@ -112,6 +112,7 @@ label {
 
 .save-button-validation {
   background-color: #90EE90;
+  cursor: s-resize;
 }
 
 .search-icon {
