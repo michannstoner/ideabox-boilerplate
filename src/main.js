@@ -1,9 +1,12 @@
+var savedIdeas = [];
+
 var saveButton = document.querySelector(".save-button");
 var formTitle = document.querySelector('.input-title');
 var formBody = document.querySelector('.input-body');
 var cardContainer = document.querySelector('.card-placement');
 var errorButton = document.querySelector('.save-button-validation');
-var deleteButton = document.querySelector('.card-delete');
+var deleteButton = document.querySelector('.card-delete-inactive');
+
 
 saveButton.addEventListener('click', function(event){
   event.preventDefault();
@@ -15,9 +18,8 @@ errorButton.addEventListener('click', function(event){
   createCard();
 });
 
-deleteButton.addEventListener('click', function(event) {
-  event.preventDefault();
-  deleteCard();
+cardContainer.addEventListener('click', function(event) {
+  deleteCard(event);
 })
 
 function createCard() {
@@ -29,7 +31,7 @@ function createCard() {
 
   if (checkTitle || checkBody) {
     cardContainer.innerHTML += `
-      <article class="card-container">
+      <article class="card-container" id=${newCard.id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
           <img src="./assets/star-active.svg" class="star-active visibility-hidden">
@@ -46,9 +48,10 @@ function createCard() {
         </div>
       </article>
     `
+    savedIdeas.push(newCard);
   }
   clearForm();
-}
+};
 
 function formValidation(formInput) {
   var confirmValid = false;
@@ -62,23 +65,31 @@ function formValidation(formInput) {
     confirmValid = true;
   }
   return confirmValid;
-}
+};
 
 function clearForm() {
   formTitle.value = "";
   formBody.value = "";
-}
+};
 
 function show(element) {
   element.classList.remove('visibility-hidden');
-}
+};
 
 function hide(element) {
   element.classList.add('visibility-hidden');
-}
+};
 
-function deleteCard() {
-  
+function deleteCard(event) {
+    var cardToDelete = event.target.closest('.card-container');
 
-}
+    if (event.target.classList.contains('card-delete-inactive')) {
+      for (var i = 0; i < savedIdeas.length; i++) {
+          if (parseInt(cardToDelete.id) === savedIdeas[i].id) {
+            savedIdeas.splice(i, 1);
+          }
+          event.target.closest('.card-container').remove();
+    }  
+  }
+};
 
