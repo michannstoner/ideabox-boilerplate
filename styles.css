@@ -172,7 +172,8 @@ label {
 }
 
 .star-inactive,
-.card-delete,
+.card-delete-inactive,
+.card-delete-active,
 .comment-img {
   width: 2em;
 }
