@@ -1,8 +1,10 @@
 var saveButton = document.querySelector(".save-button");
 var formTitle = document.querySelector('.input-title');
 var formBody = document.querySelector('.input-body');
-var cardContainer = document.querySelector('.card-placement');
 var errorButton = document.querySelector('.save-button-validation');
+
+var cardContainer = document.querySelector('.card-placement');
+
 
 saveButton.addEventListener('click', function(event){
   event.preventDefault();
@@ -13,6 +15,8 @@ errorButton.addEventListener('click', function(event){
   event.preventDefault();
   createCard();
 });
+
+cardContainer.addEventListener('click', updateStar);
 
 function createCard() {
   var userTitle = formTitle.value;
@@ -60,6 +64,18 @@ function formValidation(formInput) {
 function clearForm() {
   formTitle.value = "";
   formBody.value = "";
+}
+
+function updateStar(event) {
+  // if active update boo to true 
+
+  if (event.target.classList.contains("star-inactive")) {
+    // console.log('i made it')
+    // event.target.closest("img").remove()
+    event.target.classList.contains("star-inactive").add('visibility-hidden')
+    // show(starActive);
+    // hide(starInactive);
+  }
 }
 
 function show(element) {

@@ -104,6 +104,7 @@ label {
   font-weight: bold;
   font-size: 20px;
   margin-top: 2em;
+  outline: 0;
 }
 
 .save-button {
@@ -111,7 +112,8 @@ label {
 }
 
 .save-button-validation {
-  background-color: #90EE90;
+  background-color: #8FBC8F;
+  border: none;
   cursor: s-resize;
 }
 
