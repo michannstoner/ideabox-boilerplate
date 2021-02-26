@@ -11,7 +11,10 @@ class Idea {
   deleteFromStorage() {
 
   }
-  updateIdea() {
 
+  updateIdea(poop) {
+    if (poop) {
+    this.iSStarred = true;
+    }
   }
 }
