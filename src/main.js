@@ -1,12 +1,13 @@
 var savedIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
-var displayStarred = document.querySelector('show-starred');
+var showStarredButton = document.querySelector('.show-starred');
 var errorButton = document.querySelector('.save-button-validation');
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
 var saveButton = document.querySelector('.save-button');
-var showeAllButton = document.querySelector('.show-all');
+var showAllButton = document.querySelector('.show-all');
+var starredContainer = document.querySelector('.starred-container');
 
 cardContainer.addEventListener('click', function(event) {
   deleteCard(event);
@@ -16,7 +17,9 @@ cardContainer.addEventListener('click', function(event) {
   updateStar(event);
 });
 
-displayStarred.addEventListener('click',showStarredIdea);
+showStarredButton.addEventListener('click',function(event) {
+  viewStarredIdea(event);
+});
 
 errorButton.addEventListener('click', createCard);
 
@@ -102,7 +105,11 @@ function deleteCard(event) {
   }
 };
 
-function showStarredIdea() {
-  hide( showStarredIdea);
-  show(showeAllButton);
+function viewStarredIdea(event) {
+  event.preventDefault();
+  console.log('yes');
+  hide(showStarredButton);
+  hide(cardContainer);
+  show(showAllButton);
+  show(starredContainer);
 };
