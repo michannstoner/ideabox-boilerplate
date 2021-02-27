@@ -103,5 +103,6 @@ function deleteCard(event) {
 };
 
 function showStarredIdea() {
-
+  hide( showStarredIdea);
+  show(showeAllButton);
 };
