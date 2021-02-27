@@ -11,7 +11,11 @@ class Idea {
   deleteFromStorage() {
 
   }
-  updateIdea() {
 
+  updateIdea(validateClick) {
+    if (validateClick) {
+    this.iSStarred = true;
+    }
   }
 }
+ 

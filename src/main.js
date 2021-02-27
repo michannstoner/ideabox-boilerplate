@@ -1,28 +1,25 @@
 var savedIdeas = [];
 
-var saveButton = document.querySelector(".save-button");
-var formTitle = document.querySelector('.input-title');
-var formBody = document.querySelector('.input-body');
 var cardContainer = document.querySelector('.card-placement');
 var errorButton = document.querySelector('.save-button-validation');
-var deleteButton = document.querySelector('.card-delete-inactive');
-
-
-saveButton.addEventListener('click', function(event){
-  event.preventDefault();
-  createCard();
-});
-
-errorButton.addEventListener('click', function(event){
-  event.preventDefault();
-  createCard();
-});
+var formBody = document.querySelector('.input-body');
+var formTitle = document.querySelector('.input-title');
+var saveButton = document.querySelector(".save-button");
 
 cardContainer.addEventListener('click', function(event) {
   deleteCard(event);
-})
+});
 
-function createCard() {
+cardContainer.addEventListener('click', function(event) {
+  updateStar(event);
+});
+
+errorButton.addEventListener('click', createCard);
+
+saveButton.addEventListener('click', createCard);
+
+function createCard(event) {
+  event.preventDefault();
   var userTitle = formTitle.value;
   var userBody = formBody.value;
   var newCard = new Idea(userTitle, userBody);
@@ -34,9 +31,7 @@ function createCard() {
       <article class="card-container" id=${newCard.id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
-          <img src="./assets/star-active.svg" class="star-active visibility-hidden">
-          <img src="./assets/delete.svg" class="card-delete-inactive">
-          <img src="./assets/delete-active.svg" class="card-delete-active visibility-hidden">
+          <img src="./assets/delete.svg" class="card-delete">
         </div>
         <div class="body-container">
           <h2>${newCard.title}</h2>
@@ -55,7 +50,7 @@ function createCard() {
 
 function formValidation(formInput) {
   var confirmValid = false;
- 
+       
   if (formInput === "") {
     show(errorButton);
     hide(saveButton);
@@ -72,6 +67,16 @@ function clearForm() {
   formBody.value = "";
 };
 
+function updateStar(event) {
+  if (event.target.classList.contains("star-inactive")) {
+    event.target.src = "./assets/star-active.svg";
+    return true;
+  } else {
+    event.target.src = "./assets/star.svg";
+    return false;
+  }  
+};
+
 function show(element) {
   element.classList.remove('visibility-hidden');
 };
@@ -81,15 +86,14 @@ function hide(element) {
 };
 
 function deleteCard(event) {
-    var cardToDelete = event.target.closest('.card-container');
+  var cardToDelete = event.target.closest('.card-container');
 
-    if (event.target.classList.contains('card-delete-inactive')) {
-      for (var i = 0; i < savedIdeas.length; i++) {
-          if (parseInt(cardToDelete.id) === savedIdeas[i].id) {
-            savedIdeas.splice(i, 1);
-          }
-          event.target.closest('.card-container').remove();
-    }  
+  if (event.target.classList.contains('card-delete')) {
+    for (var i = 0; i < savedIdeas.length; i++) {
+      if (parseInt(cardToDelete.id) === savedIdeas[i].id) {
+        savedIdeas.splice(i, 1);
+      }
+        event.target.closest('.card-container').remove();
+    }
   }
 };
-
