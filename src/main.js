@@ -4,7 +4,6 @@ var saveButton = document.querySelector(".save-button");
 var formTitle = document.querySelector('.input-title');
 var formBody = document.querySelector('.input-body');
 var errorButton = document.querySelector('.save-button-validation');
-var deleteButton = document.querySelector('.card-delete-inactive');
 var cardContainer = document.querySelector('.card-placement');
 
 saveButton.addEventListener('click', function(event){
@@ -37,9 +36,7 @@ function createCard() {
       <article class="card-container" id=${newCard.id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
-          <img src="./assets/star-active.svg" class="star-active visibility-hidden">
-          <img src="./assets/delete.svg" class="card-delete-inactive">
-          <img src="./assets/delete-active.svg" class="card-delete-active visibility-hidden">
+          <img src="./assets/delete.svg" class="card-delete">
         </div>
         <div class="body-container">
           <h2>${newCard.title}</h2>
@@ -82,7 +79,6 @@ function updateStar(event) {
     return true;
   } else {
     event.target.src = "./assets/star.svg";
-
     return false;
   }  
 };
@@ -98,12 +94,12 @@ function hide(element) {
 function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
 
-  if (event.target.classList.contains('card-delete-inactive')) {
+  if (event.target.classList.contains('card-delete')) {
     for (var i = 0; i < savedIdeas.length; i++) {
       if (parseInt(cardToDelete.id) === savedIdeas[i].id) {
         savedIdeas.splice(i, 1);
       }
         event.target.closest('.card-container').remove();
-    }  
+    }
   }
 };
