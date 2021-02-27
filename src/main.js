@@ -1,30 +1,25 @@
 var savedIdeas = [];
 
-var saveButton = document.querySelector(".save-button");
-var formTitle = document.querySelector('.input-title');
-var formBody = document.querySelector('.input-body');
-var errorButton = document.querySelector('.save-button-validation');
 var cardContainer = document.querySelector('.card-placement');
+var errorButton = document.querySelector('.save-button-validation');
+var formBody = document.querySelector('.input-body');
+var formTitle = document.querySelector('.input-title');
+var saveButton = document.querySelector(".save-button");
 
-saveButton.addEventListener('click', function(event){
-  event.preventDefault();
-  createCard();
-});
-
-errorButton.addEventListener('click', function(event){
-  event.preventDefault();
-  createCard();
+cardContainer.addEventListener('click', function(event) {
+  deleteCard(event);
 });
 
 cardContainer.addEventListener('click', function(event) {
   updateStar(event);
 });
 
-cardContainer.addEventListener('click', function(event) {
-  deleteCard(event);
-});
+errorButton.addEventListener('click', createCard);
 
-function createCard() {
+saveButton.addEventListener('click', createCard);
+
+function createCard(event) {
+  event.preventDefault();
   var userTitle = formTitle.value;
   var userBody = formBody.value;
   var newCard = new Idea(userTitle, userBody);
@@ -71,7 +66,6 @@ function clearForm() {
   formTitle.value = "";
   formBody.value = "";
 };
-
 
 function updateStar(event) {
   if (event.target.classList.contains("star-inactive")) {

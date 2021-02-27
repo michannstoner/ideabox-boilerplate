@@ -12,8 +12,8 @@ class Idea {
 
   }
 
-  updateIdea(poop) {
-    if (poop) {
+  updateIdea(validateClick) {
+    if (validateClick) {
     this.iSStarred = true;
     }
   }
