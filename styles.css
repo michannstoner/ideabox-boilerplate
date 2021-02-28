@@ -27,7 +27,8 @@ h1,
   border-color: #353567;
 }
 
-.sidebar-button {
+.show-starred,
+.show-all {
   background-color: #5356A4;
   color:#E9E9F3;
   margin-left: 10px;
@@ -215,3 +216,4 @@ h2 {
 .visibility-hidden {
   display: none; 
 }
+ 

@@ -10,7 +10,8 @@
       <h1>IdeaBox</h1>
       <div class="line-divider"></div>
       <p class="filter-title">Filter Starred Ideas<p>
-      <button class=sidebar-button>Show Starred Ideas</button>
+      <button class="show-starred">Show Starred Ideas</button>
+      <button class="show-all visibility-hidden">All Ideas</button>
       <div class="line-divider"></div>
     </aside>
     <main>
@@ -34,8 +35,11 @@
         <div class="card-placement">
           <!-- Idea Cards-->
         </div>
+      </section>
+      <section class="starred-container visibility-hidden">
+        <!-- Favorited Cards-->
       </section>  
-    </main>
+    </main> 
     <script src="./src/idea.js"></script>
     <script src="./src/main.js"></script>
   </body>
