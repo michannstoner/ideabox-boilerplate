@@ -28,6 +28,11 @@ errorButton.addEventListener('click', createCard);
 
 saveButton.addEventListener('click', createCard);
 
+window.addEventListener('load', function(event) {
+  displayCards();
+  event.preventDefault()
+});
+
 function createCard(event) {
   event.preventDefault();
   var userTitle = formTitle.value;
@@ -57,6 +62,10 @@ function createCard(event) {
   }
   clearForm();
 };
+
+function displayCards() {
+
+}
 
 function formValidation(formInput) {
   var confirmValid = false;
