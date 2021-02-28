@@ -1,4 +1,6 @@
 var savedIdeas = [];
+// will update to local storage 
+var starredIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
@@ -18,7 +20,8 @@ cardContainer.addEventListener('click', function(event) {
 });
 
 showStarredButton.addEventListener('click',function(event) {
-  viewStarredIdea(event);
+  event.preventDefault();
+  viewStarredIdea();
 });
 
 errorButton.addEventListener('click', createCard);
@@ -74,24 +77,6 @@ function clearForm() {
   formBody.value = "";
 };
 
-function updateStar(event) {
-  if (event.target.classList.contains("star-inactive")) {
-    event.target.src = "./assets/star-active.svg";
-    return true;
-  } else {
-    event.target.src = "./assets/star.svg";
-    return false;
-  }  
-};
-
-function show(element) {
-  element.classList.remove('visibility-hidden');
-};
-
-function hide(element) {
-  element.classList.add('visibility-hidden');
-};
-
 function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
 
@@ -105,11 +90,40 @@ function deleteCard(event) {
   }
 };
 
-function viewStarredIdea(event) {
-  event.preventDefault();
-  console.log('yes');
+function updateStar(event) {
+  var ideaId = event.target.parentElement.parentElement.id;
+  
+  if (event.target.classList.contains("star-inactive")) {
+    event.target.src = "./assets/star-active.svg";
+  } else {
+    event.target.src = "./assets/star.svg";
+  }  
+  console.log(ideaId);
+  starredIdeas.push(ideaId);
+  return ideaId;
+};
+
+function viewStarredIdea() {
+  console.log(starredIdeas);
+
   hide(showStarredButton);
   hide(cardContainer);
   show(showAllButton);
   show(starredContainer);
 };
+
+function show(element) {
+  element.classList.remove('visibility-hidden');
+};
+
+function hide(element) {
+  element.classList.add('visibility-hidden');
+};
+
+// function findIdeaIndex(id) {
+//   for (var i = 0; i < savedIdeas.length; i++) {
+//     if (parseInt(savedIdeas[i].id === parseInt(id))){
+//       return i;
+//     }
+//   }
+// };
