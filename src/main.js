@@ -1,4 +1,4 @@
-var savedIdeas = [];
+var loggedIdea = [];
 // will update to local storage 
 var starredIdeas = [];
 
@@ -42,29 +42,49 @@ function createCard(event) {
   var checkBody = formValidation(userBody);
 
   if (checkTitle || checkBody) {
-    cardContainer.innerHTML += `
-      <article class="card-container" id=${newCard.id}>
-        <div class="card-header">
-          <img src="./assets/star.svg" class="star-inactive">
-          <img src="./assets/delete.svg" class="card-delete">
-        </div>
-        <div class="body-container">
-          <h2>${newCard.title}</h2>
-          <p class="card-body">${newCard.body}</p>
-        </div>
-        <div class="comment-container">
-          <img src="./assets/comment.svg" class="comment-img">
-          <p class="comment-tag">Comment</p>
-        </div>
-      </article>
-    `
-    savedIdeas.push(newCard);
+    // cardContainer.innerHTML += `
+    //   <article class="card-container" id=${newCard.id}>
+    //     <div class="card-header">
+    //       <img src="./assets/star.svg" class="star-inactive">
+    //       <img src="./assets/delete.svg" class="card-delete">
+    //     </div>
+    //     <div class="body-container">
+    //       <h2>${newCard.title}</h2>
+    //       <p class="card-body">${newCard.body}</p>
+    //     </div>
+    //     <div class="comment-container">
+    //       <img src="./assets/comment.svg" class="comment-img">
+    //       <p class="comment-tag">Comment</p>
+    //     </div>
+    //   </article>
+    // `
+    loggedIdea.push(newCard);
+    cardTemplate(newCard);
   }
   clearForm();
 };
 
 function displayCards() {
 
+}
+
+function cardTemplate(element) {
+  cardContainer.innerHTML += `
+      <article class="card-container" id=${element.id}>
+        <div class="card-header">
+          <img src="./assets/star.svg" class="star-inactive">
+          <img src="./assets/delete.svg" class="card-delete">
+        </div>
+        <div class="body-container">
+          <h2>${element.title}</h2>
+          <p class="card-body">${element.body}</p>
+        </div>
+        <div class="comment-container">
+          <img src="./assets/comment.svg" class="comment-img">
+          <p class="comment-tag">Comment</p>
+        </div>
+      </article>
+  `
 }
 
 function formValidation(formInput) {
@@ -90,9 +110,9 @@ function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
 
   if (event.target.classList.contains('card-delete')) {
-    for (var i = 0; i < savedIdeas.length; i++) {
-      if (parseInt(cardToDelete.id) === savedIdeas[i].id) {
-        savedIdeas.splice(i, 1);
+    for (var i = 0; i < loggedIdea.length; i++) {
+      if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
+        loggedIdea.splice(i, 1);
       }
         event.target.closest('.card-container').remove();
     }
@@ -130,8 +150,8 @@ function hide(element) {
 };
 
 // function findIdeaIndex(id) {
-//   for (var i = 0; i < savedIdeas.length; i++) {
-//     if (parseInt(savedIdeas[i].id === parseInt(id))){
+//   for (var i = 0; i < loggedIdea.length; i++) {
+//     if (parseInt(loggedIdea[i].id === parseInt(id))){
 //       return i;
 //     }
 //   }
