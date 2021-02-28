@@ -1,6 +1,4 @@
 var loggedIdea = [];
-// will update to local storage 
-var starredIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
@@ -33,7 +31,6 @@ window.addEventListener('load', function(event) {
 });
 
 function createCard() {
-  // event.preventDefault();
   var userTitle = formTitle.value;
   var userBody = formBody.value;
   var newCard = new Idea(userTitle, userBody);
@@ -41,22 +38,6 @@ function createCard() {
   var checkBody = formValidation(userBody);
 
   if (checkTitle || checkBody) {
-    // cardContainer.innerHTML += `
-    //   <article class="card-container" id=${newCard.id}>
-    //     <div class="card-header">
-    //       <img src="./assets/star.svg" class="star-inactive">
-    //       <img src="./assets/delete.svg" class="card-delete">
-    //     </div>
-    //     <div class="body-container">
-    //       <h2>${newCard.title}</h2>
-    //       <p class="card-body">${newCard.body}</p>
-    //     </div>
-    //     <div class="comment-container">
-    //       <img src="./assets/comment.svg" class="comment-img">
-    //       <p class="comment-tag">Comment</p>
-    //     </div>
-    //   </article>
-    // `
     loggedIdea.push(newCard);
     cardTemplate(newCard);
   }
@@ -68,7 +49,7 @@ function logActivity(event) {
   createCard();
   var localActivity = JSON.stringify(loggedIdea);
   localStorage.setItem('storedActivities', localActivity);
-}
+};
 
 function retrieveActivities(event) {
   event.preventDefault();
@@ -165,10 +146,10 @@ function hide(element) {
   element.classList.add('visibility-hidden');
 };
 
-// function findIdeaIndex(id) {
-//   for (var i = 0; i < loggedIdea.length; i++) {
-//     if (parseInt(loggedIdea[i].id === parseInt(id))){
-//       return i;
-//     }
-//   }
-// };
+function findIdeaIndex(id) {
+  for (var i = 0; i < loggedIdea.length; i++) {
+    if (parseInt(loggedIdea[i].id === parseInt(id))){
+      return i;
+    }
+  }
+};
