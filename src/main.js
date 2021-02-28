@@ -5,6 +5,7 @@ var showStarredButton = document.querySelector('.show-starred');
 var errorButton = document.querySelector('.save-button-validation');
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
+var inputSearch = document.querySelector('#search-input')
 var saveButton = document.querySelector('.save-button');
 var showAllButton = document.querySelector('.show-all');
 var starredContainer = document.querySelector('.starred-container');
