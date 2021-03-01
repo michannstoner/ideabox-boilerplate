@@ -2,11 +2,11 @@ var loggedIdea = [];
 
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
-var errorButton = document.querySelector('.save-button-validation');
+var validSaveButton = document.querySelector('.save-button-validation');
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
 var inputSearch = document.querySelector('#search-input')
-var saveButton = document.querySelector('.save-button');
+var inactiveSaveButton = document.querySelector('.save-button-inactive');
 var showAllButton = document.querySelector('.show-all');
 var starredContainer = document.querySelector('.starred-container');
 
@@ -23,9 +23,12 @@ showStarredButton.addEventListener('click',function(event) {
   viewStarredIdea();
 });
 
-errorButton.addEventListener('click', logActivity);
+validSaveButton.addEventListener('click', logActivity);
 
-saveButton.addEventListener('click', logActivity);
+formTitle.addEventListener('keyup', validSavedColor);
+formBody.addEventListener('keyup', validSavedColor);
+// inactiveSaveButton.addEventListener('keydown', validSavedColor);
+// inactiveSaveButton.addEventListener('click', logActivity);
 
 window.addEventListener('load', function(event) {
   displayCards(event);
@@ -104,14 +107,26 @@ function formValidation(formInput) {
   var confirmValid = false;
        
   if (formInput === "") {
-    show(errorButton);
-    hide(saveButton);
+    hide(validSaveButton);
+    show(inactiveSaveButton);
   } else {
-    show(saveButton);
-    hide(errorButton);
+    hide(inactiveSaveButton);
+    show(validSaveButton);
     confirmValid = true;
   }
   return confirmValid;
+};
+
+function validSavedColor() {
+  // console.log('yes')
+  var userTitle = formTitle.value;
+  console.log(userTitle )
+  var userBody = formBody.value;
+  console.log(userBody)
+  if (userTitle !== "" && userBody !== "") {
+    hide(inactiveSaveButton);
+    show(validSaveButton);
+  }
 };
 
 function clearForm() {
@@ -169,14 +184,6 @@ function show(element) {
 
 function hide(element) {
   element.classList.add('visibility-hidden');
-};
-
-function findIdeaIndex(id) {
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (parseInt(loggedIdea[i].id === parseInt(id))){
-      return i;
-    }
-  }
 };
 
 function filterIdeas(event) {

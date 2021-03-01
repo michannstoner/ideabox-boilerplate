@@ -57,7 +57,7 @@ main {
 
 .title-container,
 .form-body-container,
-.save-button,
+.save-button-inactive,
 .save-button-validation {
   display: flex;
   flex-direction: column;
@@ -94,7 +94,7 @@ label {
   margin-top: 4%;
 }
 
-.save-button,
+.save-button-inactive,
 .save-button-validation {
   align-items: center;
   width: 20.50em;
@@ -109,12 +109,12 @@ label {
   outline: 0;
 }
 
-.save-button {
-  background-color: #353667;
+.save-button-inactive {
+  background-color: #626388;
 }
 
 .save-button-validation {
-  background-color: #8FBC8F;
+  background-color: #353667;
   border: none;
   cursor: s-resize;
 }
