@@ -143,6 +143,19 @@ function clearForm() {
 };
 
 function deleteCard(event) {
+  // var cardToDelete = event.target.closest('.card-container');
+  
+  // if (event.target.classList.contains('card-delete')) {
+  //   for (var i = 0; i < loggedIdea.length; i++) {
+  //     if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
+  //       loggedIdea.splice(i, 1);
+  //     }
+  //   }
+  //   var localActivity = JSON.stringify(loggedIdea);
+  //   localStorage.setItem('storedActivities', localActivity);
+  //   event.target.closest('.card-container').remove();
+  // }
+
   var cardToDelete = event.target.closest('.card-container');
   
   if (event.target.classList.contains('card-delete')) {
@@ -155,7 +168,19 @@ function deleteCard(event) {
     localStorage.setItem('storedActivities', localActivity);
     event.target.closest('.card-container').remove();
   }
+
+
+
+
 };
+
+
+
+
+
+
+
+
 
 function starImage(event) {
   var ideaId = event.target.parentElement.parentElement.id;
@@ -197,28 +222,29 @@ function hide(element) {
 function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
+
   for (var i = 0; i < loggedIdea.length; i++) {
-      if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
-        cardContainer.innerHTML = '';
-        matchingHTML += `
-        <article class="card-container" id=${loggedIdea[i].id}>
-        <div class="card-header">
-          <img src="./assets/star.svg" class="star-inactive">
-          <img src="./assets/delete.svg" class="card-delete">
-        </div>
-        <div class="body-container">
-          <h2>${loggedIdea[i].title}</h2>
-          <p class="card-body">${loggedIdea[i].body}</p>
-        </div>
-        <div class="comment-container">
-          <img src="./assets/comment.svg" class="comment-img">
-          <p class="comment-tag">Comment</p>
-        </div>
-      </article>
-      `
-      }
-    
+    if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+      cardContainer.innerHTML = '';
+      matchingHTML += `
+      <article class="card-container" id=${loggedIdea[i].id}>
+      <div class="card-header">
+        <img src="./assets/star.svg" class="star-inactive">
+        <img src="./assets/delete.svg" class="card-delete">
+      </div>
+      <div class="body-container">
+        <h2>${loggedIdea[i].title}</h2>
+        <p class="card-body">${loggedIdea[i].body}</p>
+      </div>
+      <div class="comment-container">
+        <img src="./assets/comment.svg" class="comment-img">
+        <p class="comment-tag">Comment</p>
+      </div>
+    </article>
+    `
+    } 
   }
+
   if (matchingHTML.length) {
     cardContainer.innerHTML = matchingHTML;
   } 
