@@ -111,12 +111,12 @@ label {
 
 .save-button-inactive {
   background-color: #626388;
+  cursor: no-drop;
 }
 
 .save-button-validation {
   background-color: #353667;
   border: none;
-  cursor: s-resize;
 }
 
 .search-icon {

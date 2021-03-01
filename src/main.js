@@ -26,9 +26,8 @@ showStarredButton.addEventListener('click',function(event) {
 validSaveButton.addEventListener('click', logActivity);
 
 formTitle.addEventListener('keyup', validSavedColor);
+
 formBody.addEventListener('keyup', validSavedColor);
-// inactiveSaveButton.addEventListener('keydown', validSavedColor);
-// inactiveSaveButton.addEventListener('click', logActivity);
 
 window.addEventListener('load', function(event) {
   displayCards(event);
@@ -118,11 +117,9 @@ function formValidation(formInput) {
 };
 
 function validSavedColor() {
-  // console.log('yes')
   var userTitle = formTitle.value;
-  console.log(userTitle )
   var userBody = formBody.value;
-  console.log(userBody)
+ 
   if (userTitle !== "" && userBody !== "") {
     hide(inactiveSaveButton);
     show(validSaveButton);
@@ -132,6 +129,8 @@ function validSavedColor() {
 function clearForm() {
   formTitle.value = "";
   formBody.value = "";
+  show(inactiveSaveButton);
+  hide(validSaveButton);
 };
 
 function deleteCard(event) {
