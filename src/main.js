@@ -157,7 +157,6 @@ function starImage(event) {
   } else {
     event.target.src = "./assets/star.svg";
   }  
-  console.log(loggedIdea.length)
   return ideaId;
 };
 
@@ -167,7 +166,6 @@ function storeStar(event) {
     if (parseInt(starID) === loggedIdea[i].id) {
       loggedIdea[i].isStarred = true;
     }
-    console.log(loggedIdea)
   }
 };
 
