@@ -40,6 +40,10 @@ cardContainer.addEventListener('mouseout', function(event) {
   inactiveDelete(event);
 });
 
+inputSearch.addEventListener('input', function(event) {
+  filterIdeas(event);
+});
+
 function createCard() {
   var userTitle = formTitle.value;
   var userBody = formBody.value;
