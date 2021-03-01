@@ -13,38 +13,29 @@ var validSaveButton = document.querySelector('.save-button-validation');
 window.addEventListener('load', function(event) {
   displayCards(event);
 });
-
 cardContainer.addEventListener('click', function(event) {
   deleteCard(event);
 });
-
 cardContainer.addEventListener('click', function(event) {
   storeStar(event);
 });
-
 formTitle.addEventListener('keyup', updateSaveButton);
-
 formBody.addEventListener('keyup', updateSaveButton);
-
 showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
 });
-
 inputSearch.addEventListener('input', function(event) {
   filterIdeas(event);
 });
-
 validSaveButton.addEventListener('click', logActivity);
 
 inactiveSaveButton.addEventListener('click', function(event) {
   event.preventDefault();
 });
-
 cardContainer.addEventListener('mouseover', function(event) {
   activeDelete(event);
 });
-
 cardContainer.addEventListener('mouseout', function(event) {
   inactiveDelete(event);
 });
@@ -143,44 +134,20 @@ function clearForm() {
 };
 
 function deleteCard(event) {
-  // var cardToDelete = event.target.closest('.card-container');
-  
-  // if (event.target.classList.contains('card-delete')) {
-  //   for (var i = 0; i < loggedIdea.length; i++) {
-  //     if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
-  //       loggedIdea.splice(i, 1);
-  //     }
-  //   }
-  //   var localActivity = JSON.stringify(loggedIdea);
-  //   localStorage.setItem('storedActivities', localActivity);
-  //   event.target.closest('.card-container').remove();
-  // }
-
   var cardToDelete = event.target.closest('.card-container');
-  
+
   if (event.target.classList.contains('card-delete')) {
+    event.target.closest('.card-container').remove();
     for (var i = 0; i < loggedIdea.length; i++) {
-      if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
+      if (parseInt(cardToDelete.id) === parseInt(loggedIdea[i].id)) {
         loggedIdea.splice(i, 1);
       }
     }
-    var localActivity = JSON.stringify(loggedIdea);
-    localStorage.setItem('storedActivities', localActivity);
-    event.target.closest('.card-container').remove();
   }
-
-
-
-
+  var localActivity = JSON.stringify(loggedIdea);
+  localStorage.setItem('storedActivities', localActivity);
+  updateIdeaArray(event);
 };
-
-
-
-
-
-
-
-
 
 function starImage(event) {
   var ideaId = event.target.parentElement.parentElement.id;
@@ -190,6 +157,7 @@ function starImage(event) {
   } else {
     event.target.src = "./assets/star.svg";
   }  
+  console.log(loggedIdea.length)
   return ideaId;
 };
 
@@ -199,6 +167,7 @@ function storeStar(event) {
     if (parseInt(starID) === loggedIdea[i].id) {
       loggedIdea[i].isStarred = true;
     }
+    console.log(loggedIdea)
   }
 };
 
