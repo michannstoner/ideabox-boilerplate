@@ -32,8 +32,8 @@ window.addEventListener('load', function(event) {
   displayCards(event);
 });
 
-inputSearch.addEventListener('input', function() {
-  filterIdeas();
+inputSearch.addEventListener('input', function(event) {
+  filterIdeas(event);
 });
 
 function createCard() {
@@ -174,6 +174,32 @@ function findIdeaIndex(id) {
   }
 };
 
-function filterIdeas() {
-  
+function filterIdeas(event) {
+  var matchingHTML = '';
+  var searchTerm = event.target.value;
+  for (var i = 0; i < loggedIdea.length; i++) {
+      if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+        cardContainer.innerHTML = '';
+        matchingHTML += `
+        <article class="card-container" id=${loggedIdea[i].id}>
+        <div class="card-header">
+          <img src="./assets/star.svg" class="star-inactive">
+          <img src="./assets/delete.svg" class="card-delete">
+        </div>
+        <div class="body-container">
+          <h2>${loggedIdea[i].title}</h2>
+          <p class="card-body">${loggedIdea[i].body}</p>
+        </div>
+        <div class="comment-container">
+          <img src="./assets/comment.svg" class="comment-img">
+          <p class="comment-tag">Comment</p>
+        </div>
+      </article>
+      `
+      }
+    
+  }
+  if (matchingHTML.length) {
+    cardContainer.innerHTML = matchingHTML;
+  } 
 }
