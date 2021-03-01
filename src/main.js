@@ -60,9 +60,16 @@ function retrieveActivities(event) {
 
 function displayCards(event) {
   var userInfo = retrieveActivities(event);
+  var upDateArray = updateIdeaArray(event);
+  
   for (var i = 0; i < userInfo.length; i++) {
     cardTemplate(userInfo[i]);
   }
+  return upDateArray
+};
+
+function updateIdeaArray(event) {
+  loggedIdea = retrieveActivities(event);
 };
 
 function cardTemplate(element) {
@@ -105,14 +112,16 @@ function clearForm() {
 
 function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
-
+  
   if (event.target.classList.contains('card-delete')) {
     for (var i = 0; i < loggedIdea.length; i++) {
       if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
         loggedIdea.splice(i, 1);
       }
-        event.target.closest('.card-container').remove();
     }
+    var localActivity = JSON.stringify(loggedIdea);
+    localStorage.setItem('storedActivities', localActivity);
+    event.target.closest('.card-container').remove();
   }
 };
 
@@ -124,26 +133,15 @@ function updateStar(event) {
   } else {
     event.target.src = "./assets/star.svg";
   }  
-  console.log(ideaId);
-  starredIdeas.push(ideaId);
   return ideaId;
 };
 
 function viewStarredIdea() {
-  console.log(starredIdeas);
 
   hide(showStarredButton);
   hide(cardContainer);
   show(showAllButton);
   show(starredContainer);
-};
-
-function show(element) {
-  element.classList.remove('visibility-hidden');
-};
-
-function hide(element) {
-  element.classList.add('visibility-hidden');
 };
 
 function findIdeaIndex(id) {
@@ -152,4 +150,12 @@ function findIdeaIndex(id) {
       return i;
     }
   }
+};
+
+function show(element) {
+  element.classList.remove('visibility-hidden');
+};
+
+function hide(element) {
+  element.classList.add('visibility-hidden');
 };
