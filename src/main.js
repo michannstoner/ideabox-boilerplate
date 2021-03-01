@@ -39,7 +39,6 @@ cardContainer.addEventListener('mouseover', function(event) {
 cardContainer.addEventListener('mouseout', function(event) {
   inactiveDelete(event);
 });
-
 inputSearch.addEventListener('input', function(event) {
   filterIdeas(event);
 });
