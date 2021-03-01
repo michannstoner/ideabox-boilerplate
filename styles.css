@@ -41,6 +41,7 @@ h1,
 /* ***** MAIN PAGE ***** */
 main {
   width: 90vw;
+  overflow: hidden;
 }
 
 /* ***** FORM ***** */
@@ -151,6 +152,8 @@ label {
   width: 100%;
   height: 55em;
   background-color: #EAEAF4;
+  overflow-y: auto;
+  padding-right: 17px;
 }
 
 .card-placement {
@@ -160,7 +163,6 @@ label {
   width: 76em;
   height: 100%;
   margin-top: 3em;
-  overflow-y: auto;
 }
 
 .card-container {
