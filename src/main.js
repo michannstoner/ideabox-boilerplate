@@ -7,22 +7,31 @@ var formContainer = document.querySelector('.form-container')
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
 var inputSearch = document.querySelector('#search-input')
-var saveButton = document.querySelector('.save-button');
+var inactiveSaveButton = document.querySelector('.save-button-inactive');
 var showAllButton = document.querySelector('.show-all');
+var showStarredButton = document.querySelector('.show-starred');
 var starredContainer = document.querySelector('.starred-container');
+var validSaveButton = document.querySelector('.save-button-validation');
 
+window.addEventListener('load', function(event) {
+  displayCards(event);
+});
 cardContainer.addEventListener('click', function(event) {
   deleteCard(event);
 });
-
 cardContainer.addEventListener('click', function(event) {
   storeStar(event);
 });
-
+formTitle.addEventListener('keyup', updateSaveButton);
+formBody.addEventListener('keyup', updateSaveButton);
 showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
 });
+inputSearch.addEventListener('input', function(event) {
+  filterIdeas(event);
+});
+validSaveButton.addEventListener('click', logActivity);
 
 showAllButton.addEventListener('click', function(event) {
   event.preventDefault();
@@ -40,6 +49,14 @@ saveButton.addEventListener('click', logActivity);
 window.addEventListener('load', function(event) {
   displayCards(event);
   retrieveStarred();
+inactiveSaveButton.addEventListener('click', function(event) {
+  event.preventDefault();
+});
+cardContainer.addEventListener('mouseover', function(event) {
+  activeDelete(event);
+});
+cardContainer.addEventListener('mouseout', function(event) {
+  inactiveDelete(event);
 });
 
 inputSearch.addEventListener('input', function(event) {
@@ -50,8 +67,8 @@ function createCard() {
   var userTitle = formTitle.value;
   var userBody = formBody.value;
   var newCard = new Idea(userTitle, userBody);
-  var checkTitle = formValidation(userTitle);
-  var checkBody = formValidation(userBody);
+  var checkTitle = validateInput(userTitle);
+  var checkBody = validateInput(userBody);
 
   if (checkTitle || checkBody) {
     loggedIdeas.push(newCard);
@@ -119,38 +136,48 @@ function cardTemplate(element) {
   `
 };
 
-function formValidation(formInput) {
-  var confirmValid = false;
-       
-  if (formInput === "") {
-    show(errorButton);
-    hide(saveButton);
+function validateInput(userInput) {
+  if (userInput !== "") {
+    return true;
   } else {
-    show(saveButton);
-    hide(errorButton);
-    confirmValid = true;
+    return false;
   }
-  return confirmValid;
 };
 
+function updateSaveButton() {
+  var title = validateInput(formTitle.value); 
+  var body = validateInput(formBody.value); 
+  
+  if (title && body) {
+    show(validSaveButton);
+    hide(inactiveSaveButton);
+  } else {
+    show(inactiveSaveButton);
+    hide(validSaveButton);
+  }
+};  
+  
 function clearForm() {
   formTitle.value = "";
   formBody.value = "";
+  show(inactiveSaveButton);
+  hide(validSaveButton);
 };
 
 function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
-  
+
   if (event.target.classList.contains('card-delete')) {
-    for (var i = 0; i < loggedIdeas.length; i++) {
-      if (parseInt(cardToDelete.id) === loggedIdeas[i].id) {
-        loggedIdeas.splice(i, 1);
+    event.target.closest('.card-container').remove();
+    for (var i = 0; i < loggedIdea.length; i++) {
+      if (parseInt(cardToDelete.id) === parseInt(loggedIdea[i].id)) {
+        loggedIdea.splice(i, 1);
       }
     }
-    var localActivity = JSON.stringify(loggedIdeas);
-    localStorage.setItem('storedActivities', localActivity);
-    event.target.closest('.card-container').remove();
   }
+  var localActivity = JSON.stringify(loggedIdea);
+  localStorage.setItem('storedActivities', localActivity);
+  updateIdeaArray(event);
 };
 
 function starImage(event) {
@@ -212,40 +239,46 @@ function hide(element) {
   element.classList.add('visibility-hidden');
 };
 
-function findIdeaIndex(id) {
-  for (var i = 0; i < loggedIdeas.length; i++) {
-    if (parseInt(loggedIdeas[i].id === parseInt(id))){
-      return i;
-    }
-  }
-};
-
 function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
-  for (var i = 0; i < loggedIdeas.length; i++) {
-      if (loggedIdeas[i].title.includes(searchTerm) || loggedIdeas[i].body.includes(searchTerm)) {
-        cardContainer.innerHTML = '';
-        matchingHTML += `
-        <article class="card-container" id=${loggedIdeas[i].id}>
-        <div class="card-header">
-          <img src="./assets/star.svg" class="star-inactive">
-          <img src="./assets/delete.svg" class="card-delete">
-        </div>
-        <div class="body-container">
-          <h2>${loggedIdeas[i].title}</h2>
-          <p class="card-body">${loggedIdeas[i].body}</p>
-        </div>
-        <div class="comment-container">
-          <img src="./assets/comment.svg" class="comment-img">
-          <p class="comment-tag">Comment</p>
-        </div>
-      </article>
-      `
-      }
-    
+
+  for (var i = 0; i < loggedIdea.length; i++) {
+    if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+      cardContainer.innerHTML = '';
+      matchingHTML += `
+      <article class="card-container" id=${loggedIdea[i].id}>
+      <div class="card-header">
+        <img src="./assets/star.svg" class="star-inactive">
+        <img src="./assets/delete.svg" class="card-delete">
+      </div>
+      <div class="body-container">
+        <h2>${loggedIdea[i].title}</h2>
+        <p class="card-body">${loggedIdea[i].body}</p>
+      </div>
+      <div class="comment-container">
+        <img src="./assets/comment.svg" class="comment-img">
+        <p class="comment-tag">Comment</p>
+      </div>
+    </article>
+    `
+    } 
   }
+
   if (matchingHTML.length) {
     cardContainer.innerHTML = matchingHTML;
   } 
-}
+};
+
+function activeDelete(event) {
+  if (event.target.classList.contains('card-delete')) {
+    event.target.src = "./assets/delete-active.svg";
+  }
+};
+
+function inactiveDelete(event) {
+  if (event.target.classList.contains('card-delete')) {
+    event.target.src = "./assets/delete.svg";
+  }
+};
+
