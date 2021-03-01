@@ -37,6 +37,10 @@ inputSearch.addEventListener('input', function(event) {
   filterIdeas(event);
 });
 
+inactiveSaveButton.addEventListener('click', function(event) {
+  event.preventDefault();
+})
+
 function createCard() {
   var userTitle = formTitle.value;
   var userBody = formBody.value;
