@@ -79,6 +79,7 @@ main {
   width: 30em;
   border-radius: 4px;
   border: 2px solid #5356A4;
+  font-family: 'Open Sans', sans-serif;
 }
 
 label {

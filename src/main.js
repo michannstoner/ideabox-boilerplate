@@ -15,7 +15,7 @@ cardContainer.addEventListener('click', function(event) {
 });
 
 cardContainer.addEventListener('click', function(event) {
-  updateStar(event);
+  storeStar(event);
 });
 
 showStarredButton.addEventListener('click',function(event) {
@@ -134,7 +134,7 @@ function deleteCard(event) {
   }
 };
 
-function updateStar(event) {
+function starImage(event) {
   var ideaId = event.target.parentElement.parentElement.id;
   
   if (event.target.classList.contains("star-inactive")) {
@@ -145,20 +145,22 @@ function updateStar(event) {
   return ideaId;
 };
 
-function viewStarredIdea() {
+function storeStar(event) {
+  var starID = starImage(event);
+  for (var i = 0; i < loggedIdea.length; i++) {
+    if (parseInt(starID) === loggedIdea[i].id) {
+      loggedIdea[i].isStarred = true;
+    }
+  }
+};
 
+function viewStarredIdea() {
+// conditional for loggedIdea[i].isStarred === true 
+// may be able to use cardTemp to display 
   hide(showStarredButton);
   hide(cardContainer);
   show(showAllButton);
   show(starredContainer);
-};
-
-function findIdeaIndex(id) {
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (parseInt(loggedIdea[i].id === parseInt(id))){
-      return i;
-    }
-  }
 };
 
 function show(element) {
