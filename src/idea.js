@@ -4,15 +4,12 @@ class Idea {
     this.body = body;
     this.id = Date.now();
     this.isStarred = false;
-    // this.favoriteArray = [];
   };
 
   saveToStorage() {
-
   };
 
   deleteFromStorage() {
-
   };
 
   updateIdea(validateClick) {

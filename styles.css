@@ -12,7 +12,7 @@ body {
 .sidebar {
   background-color: #1F1F3D;
   font-family: 'Open Sans', sans-serif;
-  width: 30em;
+  width: 15em;
   height: 85em;
 }
 
@@ -31,8 +31,8 @@ h1,
 .show-all {
   background-color: #5356A4;
   color:#E9E9F3;
-  margin-left: 10px;
-  padding: .5em 1em;
+  margin: 8px 0 0 6px;
+  padding: .5em 1.5em;
   font-size: 1em;
   font-weight: 700;
   border: none;
@@ -40,7 +40,8 @@ h1,
 
 /* ***** MAIN PAGE ***** */
 main {
-  width: 81vw;
+  width: 90vw;
+  overflow: hidden;
 }
 
 /* ***** FORM ***** */
@@ -57,7 +58,7 @@ main {
 
 .title-container,
 .form-body-container,
-.save-button,
+.save-button-inactive,
 .save-button-validation {
   display: flex;
   flex-direction: column;
@@ -94,7 +95,7 @@ label {
   margin-top: 4%;
 }
 
-.save-button,
+.save-button-inactive,
 .save-button-validation {
   align-items: center;
   width: 20.50em;
@@ -109,14 +110,14 @@ label {
   outline: 0;
 }
 
-.save-button {
-  background-color: #353667;
+.save-button-inactive {
+  background-color: #626388;
+  cursor: no-drop;
 }
 
 .save-button-validation {
-  background-color: #8FBC8F;
+  background-color: #353667;
   border: none;
-  cursor: s-resize;
 }
 
 .search-icon {
@@ -151,6 +152,8 @@ label {
   width: 100%;
   height: 55em;
   background-color: #EAEAF4;
+  overflow-y: auto;
+  padding-right: 17px;
 }
 
 .card-placement {
@@ -160,7 +163,6 @@ label {
   width: 76em;
   height: 100%;
   margin-top: 3em;
-  overflow-y: auto;
 }
 
 .card-container {
