@@ -1,3 +1,5 @@
+DELETE BUG FIX
+
 var loggedIdea = [];
 
 var cardContainer = document.querySelector('.card-placement');
@@ -22,12 +24,15 @@ showStarredButton.addEventListener('click',function(event) {
   viewStarredIdea();
 });
 
-errorButton.addEventListener('click', createCard);
+errorButton.addEventListener('click', logActivity);
 
-saveButton.addEventListener('click', createCard);
+saveButton.addEventListener('click', logActivity);
 
-function createCard(event) {
-  event.preventDefault();
+window.addEventListener('load', function(event) {
+  displayCards(event);
+});
+
+function createCard() {
   var userTitle = formTitle.value;
   var userBody = formBody.value;
   var newCard = new Idea(userTitle, userBody);
@@ -35,25 +40,57 @@ function createCard(event) {
   var checkBody = formValidation(userBody);
 
   if (checkTitle || checkBody) {
-    cardContainer.innerHTML += `
-      <article class="card-container" id=${newCard.id}>
+    loggedIdea.push(newCard);
+    cardTemplate(newCard);
+  }
+  clearForm();
+};
+
+function logActivity(event) {
+  event.preventDefault();
+  createCard();
+  var localActivity = JSON.stringify(loggedIdea);
+  localStorage.setItem('storedActivities', localActivity);
+};
+
+function retrieveActivities(event) {
+  event.preventDefault();
+  var retrieveActivity = localStorage.getItem('storedActivities');
+  var userActivityList = JSON.parse(retrieveActivity);
+  return userActivityList; 
+};
+
+function displayCards(event) {
+  var userInfo = retrieveActivities(event);
+  var upDateArray = updateIdeaArray(event);
+  
+  for (var i = 0; i < userInfo.length; i++) {
+    cardTemplate(userInfo[i]);
+  }
+  return upDateArray
+};
+
+function updateIdeaArray(event) {
+  loggedIdea = retrieveActivities(event);
+};
+
+function cardTemplate(element) {
+  cardContainer.innerHTML += `
+      <article class="card-container" id=${element.id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
           <img src="./assets/delete.svg" class="card-delete">
         </div>
         <div class="body-container">
-          <h2>${newCard.title}</h2>
-          <p class="card-body">${newCard.body}</p>
+          <h2>${element.title}</h2>
+          <p class="card-body">${element.body}</p>
         </div>
         <div class="comment-container">
           <img src="./assets/comment.svg" class="comment-img">
           <p class="comment-tag">Comment</p>
         </div>
       </article>
-    `
-    loggedIdea.push(newCard);
-  }
-  clearForm();
+  `
 };
 
 function formValidation(formInput) {
@@ -77,14 +114,16 @@ function clearForm() {
 
 function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
-
+  
   if (event.target.classList.contains('card-delete')) {
     for (var i = 0; i < loggedIdea.length; i++) {
       if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
         loggedIdea.splice(i, 1);
       }
-        event.target.closest('.card-container').remove();
     }
+    var localActivity = JSON.stringify(loggedIdea);
+    localStorage.setItem('storedActivities', localActivity);
+    event.target.closest('.card-container').remove();
   }
 };
 
@@ -96,18 +135,23 @@ function updateStar(event) {
   } else {
     event.target.src = "./assets/star.svg";
   }  
-  console.log(ideaId);
-  starredIdeas.push(ideaId);
   return ideaId;
 };
 
 function viewStarredIdea() {
-  console.log(starredIdeas);
 
   hide(showStarredButton);
   hide(cardContainer);
   show(showAllButton);
   show(starredContainer);
+};
+
+function findIdeaIndex(id) {
+  for (var i = 0; i < loggedIdea.length; i++) {
+    if (parseInt(loggedIdea[i].id === parseInt(id))){
+      return i;
+    }
+  }
 };
 
 function show(element) {
@@ -118,10 +162,4 @@ function hide(element) {
   element.classList.add('visibility-hidden');
 };
 
-// function findIdeaIndex(id) {
-//   for (var i = 0; i < loggedIdea.length; i++) {
-//     if (parseInt(loggedIdea[i].id === parseInt(id))){
-//       return i;
-//     }
-//   }
-// };
+
