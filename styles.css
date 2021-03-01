@@ -163,7 +163,8 @@ label {
   overflow-y: auto;
 }
 
-.card-container {
+.card-container,
+.starred-container {
   width: 18em;
   height: 23em;
   margin: 1em 1em;

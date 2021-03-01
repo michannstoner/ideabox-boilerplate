@@ -24,8 +24,10 @@ showStarredButton.addEventListener('click',function(event) {
 });
 
 showAllButton.addEventListener('click', function(event) {
+  show(cardContainer)
   show(showStarredButton);
   hide(showAllButton);
+  hide(starredContainer)
 })
 
 errorButton.addEventListener('click', logActivity);
@@ -182,11 +184,11 @@ function viewStarredIdea() {
      `
     } 
   }
-  cardContainer.innerHTML = storedIdeas;
+  starredContainer.innerHTML = storedIdeas;
   hide(showStarredButton);
-  // hide(cardContainer);
+  hide(cardContainer);
   show(showAllButton);
-  // show(starredContainer);
+  show(starredContainer);
 };
 
 function show(element) {
