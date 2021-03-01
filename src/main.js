@@ -43,6 +43,14 @@ inactiveSaveButton.addEventListener('click', function(event) {
 
 showAllButton.addEventListener('click', viewMain);
 
+cardContainer.addEventListener('mouseover', function(event) {
+  activeDelete(event);
+});
+
+cardContainer.addEventListener('mouseout', function(event) {
+  inactiveDelete(event);
+});
+
 function createCard() {
   var userTitle = formTitle.value;
   var userBody = formBody.value;
@@ -183,14 +191,6 @@ function viewStarredIdea() {
   show(starredContainer);
 };
 
-function show(element) {
-  element.classList.remove('visibility-hidden');
-};
-
-function hide(element) {
-  element.classList.add('visibility-hidden');
-};
-
 function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
@@ -225,5 +225,25 @@ function viewMain() {
   hide(showAllButton);
   hide(starredContainer);
   show(cardContainer);
-  show(showStarredButton)
-}
+  show(showStarredButton);
+};
+
+function activeDelete(event) {
+  if (event.target.classList.contains('card-delete')) {
+    event.target.src = "./assets/delete-active.svg";
+  }
+};
+
+function inactiveDelete(event) {
+  if (event.target.classList.contains('card-delete')) {
+    event.target.src = "./assets/delete.svg";
+  }
+};
+
+function show(element) {
+  element.classList.remove('visibility-hidden');
+};
+
+function hide(element) {
+  element.classList.add('visibility-hidden');
+};
