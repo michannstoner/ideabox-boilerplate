@@ -60,16 +60,20 @@ function retrieveActivities(event) {
 
 function displayCards(event) {
   var userInfo = retrieveActivities(event);
-  var upDateArray = updateIdeaArray(event);
+  var updateArray = updateIdeaArray(event);
   
-  for (var i = 0; i < userInfo.length; i++) {
-    cardTemplate(userInfo[i]);
+  if (userInfo) {
+    for (var i = 0; i < userInfo.length; i++) {
+      cardTemplate(userInfo[i]);
+    }
   }
-  return upDateArray
+  return updateArray;
 };
 
 function updateIdeaArray(event) {
-  loggedIdea = retrieveActivities(event);
+  if (Array.isArray(retrieveActivities(event))) {
+    loggedIdea.concat(retrieveActivities(event));
+  }
 };
 
 function cardTemplate(element) {
