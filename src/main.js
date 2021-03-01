@@ -1,4 +1,5 @@
 var loggedIdea = [];
+var starredIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
@@ -29,6 +30,10 @@ saveButton.addEventListener('click', logActivity);
 
 window.addEventListener('load', function(event) {
   displayCards(event);
+});
+
+inputSearch.addEventListener('input', function() {
+  filterIdeas();
 });
 
 function createCard() {
@@ -130,8 +135,8 @@ function updateStar(event) {
   return ideaId;
 };
 
-function viewStarredIdea() {
-  console.log(starredIdeas);
+function viewStarredIdea(event) {
+
 
   hide(showStarredButton);
   hide(cardContainer);
@@ -154,3 +159,7 @@ function findIdeaIndex(id) {
     }
   }
 };
+
+function filterIdeas() {
+  
+}
