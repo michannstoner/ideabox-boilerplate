@@ -14,7 +14,7 @@ cardContainer.addEventListener('click', function(event) {
 });
 
 cardContainer.addEventListener('click', function(event) {
-  updateStar(event);
+  storeStar(event);
 });
 
 showStarredButton.addEventListener('click',function(event) {
@@ -140,6 +140,16 @@ function updateStar(event) {
   return ideaId;
 };
 
+function storeStar(event) {
+  var starID = updateStar(event);
+  for (var i = 0; i < loggedIdea.length; i++) {
+    if (parseInt(starID) === loggedIdea[i].id) {
+      console.log('hi')
+      loggedIdea[i].isStarred = true;
+    }
+  }
+}
+
 function viewStarredIdea() {
 
   hide(showStarredButton);
@@ -148,13 +158,13 @@ function viewStarredIdea() {
   show(starredContainer);
 };
 
-function findIdeaIndex(id) {
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (parseInt(loggedIdea[i].id === parseInt(id))){
-      return i;
-    }
-  }
-};
+// function findIdeaIndex(id) {
+//   for (var i = 0; i < loggedIdea.length; i++) {
+//     if (parseInt(loggedIdea[i].id === parseInt(id))){
+//       return i;
+//     }
+//   }
+// };
 
 function show(element) {
   element.classList.remove('visibility-hidden');
