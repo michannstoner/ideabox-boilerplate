@@ -23,6 +23,11 @@ showStarredButton.addEventListener('click',function(event) {
   viewStarredIdea();
 });
 
+showAllButton.addEventListener('click', function(event) {
+  show(showStarredButton);
+  hide(showAllButton);
+})
+
 errorButton.addEventListener('click', logActivity);
 
 saveButton.addEventListener('click', logActivity);
@@ -155,12 +160,33 @@ function storeStar(event) {
 };
 
 function viewStarredIdea() {
-// conditional for loggedIdeas[i].isStarred === true 
-// may be able to use cardTemp to display 
+  var storedIdeas = '';
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (loggedIdeas[i].isStarred === true) {
+      
+      storedIdeas += `
+       <article class="card-container" id=${loggedIdeas[i].id}>
+       <div class="card-header">
+         <img src="./assets/star.svg" class="star-inactive">
+         <img src="./assets/delete.svg" class="card-delete">
+       </div>
+       <div class="body-container">
+         <h2>${loggedIdeas[i].title}</h2>
+        <p class="card-body">${loggedIdeas[i].body}</p>
+       </div>
+       <div class="comment-container">
+         <img src="./assets/comment.svg" class="comment-img">
+         <p class="comment-tag">Comment</p>
+       </div>
+     </article>
+     `
+    } 
+  }
+  cardContainer.innerHTML = storedIdeas;
   hide(showStarredButton);
-  hide(cardContainer);
+  // hide(cardContainer);
   show(showAllButton);
-  show(starredContainer);
+  // show(starredContainer);
 };
 
 function show(element) {
