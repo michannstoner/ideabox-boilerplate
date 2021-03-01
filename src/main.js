@@ -9,6 +9,7 @@ var showAllButton = document.querySelector('.show-all');
 var showStarredButton = document.querySelector('.show-starred');
 var starredContainer = document.querySelector('.starred-container');
 var validSaveButton = document.querySelector('.save-button-validation');
+var commentButton = document.querySelector('.comment-img');
 
 window.addEventListener('load', function(event) {
   displayCards(event);
@@ -43,6 +44,8 @@ cardContainer.addEventListener('mouseout', function(event) {
 inputSearch.addEventListener('input', function(event) {
   filterIdeas(event);
 });
+
+commentButton.addEventListener('click', viewCommentForm);
 
 function createCard() {
   var userTitle = formTitle.value;
@@ -220,6 +223,10 @@ function filterIdeas(event) {
     cardContainer.innerHTML = matchingHTML;
   } 
 };
+
+function viewCommentForm() {
+  
+}
 
 function activeDelete(event) {
   if (event.target.classList.contains('card-delete')) {
