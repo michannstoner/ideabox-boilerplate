@@ -24,6 +24,7 @@ showStarredButton.addEventListener('click',function(event) {
 });
 
 showAllButton.addEventListener('click', function(event) {
+  event.preventDefault();
   show(cardContainer)
   show(showStarredButton);
   hide(showAllButton);

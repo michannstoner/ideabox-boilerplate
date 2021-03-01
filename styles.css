@@ -153,7 +153,8 @@ label {
   background-color: #EAEAF4;
 }
 
-.card-placement {
+.card-placement,
+.starred-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -163,8 +164,7 @@ label {
   overflow-y: auto;
 }
 
-.card-container,
-.starred-container {
+.card-container {
   width: 18em;
   height: 23em;
   margin: 1em 1em;
