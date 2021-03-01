@@ -20,12 +20,5 @@ class Idea {
     this.iSStarred = true;
     }
   };
-
-  // rememberFavorites() {
-  //   if (this.isStarred) {
-
-  //   }
-  // }
-
 };
  
