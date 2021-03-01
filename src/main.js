@@ -163,3 +163,4 @@ function show(element) {
 function hide(element) {
   element.classList.add('visibility-hidden');
 };
+
