@@ -1,4 +1,4 @@
-var loggedIdea = [];
+var loggedIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
@@ -43,7 +43,7 @@ function createCard() {
   var checkBody = formValidation(userBody);
 
   if (checkTitle || checkBody) {
-    loggedIdea.push(newCard);
+    loggedIdeas.push(newCard);
     cardTemplate(newCard);
   }
   clearForm();
@@ -52,7 +52,7 @@ function createCard() {
 function logActivity(event) {
   event.preventDefault();
   createCard();
-  var localActivity = JSON.stringify(loggedIdea);
+  var localActivity = JSON.stringify(loggedIdeas);
   localStorage.setItem('storedActivities', localActivity);
 };
 
@@ -77,7 +77,7 @@ function displayCards(event) {
 
 function updateIdeaArray(event) {
   if (Array.isArray(retrieveActivities(event))) {
-    loggedIdea.concat(retrieveActivities(event));
+    loggedIdeas.concat(retrieveActivities(event));
   }
 };
 
@@ -123,12 +123,12 @@ function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
   
   if (event.target.classList.contains('card-delete')) {
-    for (var i = 0; i < loggedIdea.length; i++) {
-      if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
-        loggedIdea.splice(i, 1);
+    for (var i = 0; i < loggedIdeas.length; i++) {
+      if (parseInt(cardToDelete.id) === loggedIdeas[i].id) {
+        loggedIdeas.splice(i, 1);
       }
     }
-    var localActivity = JSON.stringify(loggedIdea);
+    var localActivity = JSON.stringify(loggedIdeas);
     localStorage.setItem('storedActivities', localActivity);
     event.target.closest('.card-container').remove();
   }
@@ -147,15 +147,15 @@ function starImage(event) {
 
 function storeStar(event) {
   var starID = starImage(event);
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (parseInt(starID) === loggedIdea[i].id) {
-      loggedIdea[i].isStarred = true;
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (parseInt(starID) === loggedIdeas[i].id) {
+      loggedIdeas[i].isStarred = true;
     }
   }
 };
 
 function viewStarredIdea() {
-// conditional for loggedIdea[i].isStarred === true 
+// conditional for loggedIdeas[i].isStarred === true 
 // may be able to use cardTemp to display 
   hide(showStarredButton);
   hide(cardContainer);
@@ -172,8 +172,8 @@ function hide(element) {
 };
 
 function findIdeaIndex(id) {
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (parseInt(loggedIdea[i].id === parseInt(id))){
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (parseInt(loggedIdeas[i].id === parseInt(id))){
       return i;
     }
   }
@@ -182,18 +182,18 @@ function findIdeaIndex(id) {
 function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
-  for (var i = 0; i < loggedIdea.length; i++) {
-      if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+  for (var i = 0; i < loggedIdeas.length; i++) {
+      if (loggedIdeas[i].title.includes(searchTerm) || loggedIdeas[i].body.includes(searchTerm)) {
         cardContainer.innerHTML = '';
         matchingHTML += `
-        <article class="card-container" id=${loggedIdea[i].id}>
+        <article class="card-container" id=${loggedIdeas[i].id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
           <img src="./assets/delete.svg" class="card-delete">
         </div>
         <div class="body-container">
-          <h2>${loggedIdea[i].title}</h2>
-          <p class="card-body">${loggedIdea[i].body}</p>
+          <h2>${loggedIdeas[i].title}</h2>
+          <p class="card-body">${loggedIdeas[i].body}</p>
         </div>
         <div class="comment-container">
           <img src="./assets/comment.svg" class="comment-img">
