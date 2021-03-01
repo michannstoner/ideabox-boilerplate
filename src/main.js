@@ -22,9 +22,9 @@ cardContainer.addEventListener('click', function(event) {
   storeStar(event);
 });
 
-formTitle.addEventListener('keyup', validSavedColor);
+formTitle.addEventListener('keyup', updateSaveButton);
 
-formBody.addEventListener('keyup', validSavedColor);
+formBody.addEventListener('keyup', updateSaveButton);
 
 showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
@@ -40,8 +40,6 @@ validSaveButton.addEventListener('click', logActivity);
 inactiveSaveButton.addEventListener('click', function(event) {
   event.preventDefault();
 });
-
-showAllButton.addEventListener('click', viewMain);
 
 cardContainer.addEventListener('mouseover', function(event) {
   activeDelete(event);
@@ -130,16 +128,27 @@ function formValidation(formInput) {
   return confirmValid;
 };
 
-function validSavedColor() {
-  var userTitle = formTitle.value;
-  var userBody = formBody.value;
- 
-  if (userTitle !== "" && userBody !== "") {
-    hide(inactiveSaveButton);
-    show(validSaveButton);
+function validateInput(userInput) {
+  if (userInput !== "") {
+    return true;
+  } else {
+    return false;
   }
 };
 
+function updateSaveButton() {
+  var title = validateInput(formTitle.value); 
+  var body = validateInput(formBody.value); 
+  
+  if (title && body) {
+    show(validSaveButton);
+    hide(inactiveSaveButton);
+  } else {
+    show(inactiveSaveButton);
+    hide(validSaveButton);
+  }
+};  
+  
 function clearForm() {
   formTitle.value = "";
   formBody.value = "";
@@ -219,13 +228,6 @@ function filterIdeas(event) {
   if (matchingHTML.length) {
     cardContainer.innerHTML = matchingHTML;
   } 
-};
-
-function viewMain() {
-  hide(showAllButton);
-  hide(starredContainer);
-  show(cardContainer);
-  show(showStarredButton);
 };
 
 function activeDelete(event) {
