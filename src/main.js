@@ -1,6 +1,4 @@
-var savedIdeas = [];
-// will update to local storage 
-var starredIdeas = [];
+var loggedIdea = [];
 
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
@@ -53,7 +51,7 @@ function createCard(event) {
         </div>
       </article>
     `
-    savedIdeas.push(newCard);
+    loggedIdea.push(newCard);
   }
   clearForm();
 };
@@ -81,9 +79,9 @@ function deleteCard(event) {
   var cardToDelete = event.target.closest('.card-container');
 
   if (event.target.classList.contains('card-delete')) {
-    for (var i = 0; i < savedIdeas.length; i++) {
-      if (parseInt(cardToDelete.id) === savedIdeas[i].id) {
-        savedIdeas.splice(i, 1);
+    for (var i = 0; i < loggedIdea.length; i++) {
+      if (parseInt(cardToDelete.id) === loggedIdea[i].id) {
+        loggedIdea.splice(i, 1);
       }
         event.target.closest('.card-container').remove();
     }
@@ -121,8 +119,8 @@ function hide(element) {
 };
 
 // function findIdeaIndex(id) {
-//   for (var i = 0; i < savedIdeas.length; i++) {
-//     if (parseInt(savedIdeas[i].id === parseInt(id))){
+//   for (var i = 0; i < loggedIdea.length; i++) {
+//     if (parseInt(loggedIdea[i].id === parseInt(id))){
 //       return i;
 //     }
 //   }
