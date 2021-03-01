@@ -3,6 +3,7 @@ var loggedIdeas = [];
 var cardContainer = document.querySelector('.card-placement');
 var showStarredButton = document.querySelector('.show-starred');
 var errorButton = document.querySelector('.save-button-validation');
+var formContainer = document.querySelector('.form-container')
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
 var inputSearch = document.querySelector('#search-input')
@@ -25,6 +26,7 @@ showStarredButton.addEventListener('click',function(event) {
 
 showAllButton.addEventListener('click', function(event) {
   event.preventDefault();
+  show(formContainer);
   show(cardContainer)
   show(showStarredButton);
   hide(showAllButton);
@@ -37,6 +39,7 @@ saveButton.addEventListener('click', logActivity);
 
 window.addEventListener('load', function(event) {
   displayCards(event);
+  retrieveStarred();
 });
 
 inputSearch.addEventListener('input', function(event) {
@@ -88,6 +91,14 @@ function updateIdeaArray(event) {
     loggedIdeas.concat(retrieveActivities(event));
   }
 };
+
+function retrieveStarred (event) {
+  if (storeStar()) {
+    logActivity();
+    retrieveActivities();
+  }
+  displayCards();
+}
 
 function cardTemplate(element) {
   cardContainer.innerHTML += `
@@ -187,6 +198,7 @@ function viewStarredIdea() {
   }
   starredContainer.innerHTML = storedIdeas;
   hide(showStarredButton);
+  hide(formContainer);
   hide(cardContainer);
   show(showAllButton);
   show(starredContainer);
