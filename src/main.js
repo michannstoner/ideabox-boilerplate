@@ -1,14 +1,18 @@
 var loggedIdea = [];
 
 var cardContainer = document.querySelector('.card-placement');
-var showStarredButton = document.querySelector('.show-starred');
-var validSaveButton = document.querySelector('.save-button-validation');
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
 var inputSearch = document.querySelector('#search-input')
 var inactiveSaveButton = document.querySelector('.save-button-inactive');
 var showAllButton = document.querySelector('.show-all');
+var showStarredButton = document.querySelector('.show-starred');
 var starredContainer = document.querySelector('.starred-container');
+var validSaveButton = document.querySelector('.save-button-validation');
+
+window.addEventListener('load', function(event) {
+  displayCards(event);
+});
 
 cardContainer.addEventListener('click', function(event) {
   deleteCard(event);
@@ -18,28 +22,26 @@ cardContainer.addEventListener('click', function(event) {
   storeStar(event);
 });
 
-showStarredButton.addEventListener('click',function(event) {
-  event.preventDefault();
-  viewStarredIdea();
-});
-
-validSaveButton.addEventListener('click', logActivity);
-
 formTitle.addEventListener('keyup', validSavedColor);
 
 formBody.addEventListener('keyup', validSavedColor);
 
-window.addEventListener('load', function(event) {
-  displayCards(event);
+showStarredButton.addEventListener('click',function(event) {
+  event.preventDefault();
+  viewStarredIdea();
 });
 
 inputSearch.addEventListener('input', function(event) {
   filterIdeas(event);
 });
 
+validSaveButton.addEventListener('click', logActivity);
+
 inactiveSaveButton.addEventListener('click', function(event) {
   event.preventDefault();
-})
+});
+
+showAllButton.addEventListener('click', viewMain);
 
 function createCard() {
   var userTitle = formTitle.value;
@@ -217,4 +219,11 @@ function filterIdeas(event) {
   if (matchingHTML.length) {
     cardContainer.innerHTML = matchingHTML;
   } 
+};
+
+function viewMain() {
+  hide(showAllButton);
+  hide(starredContainer);
+  show(cardContainer);
+  show(showStarredButton)
 }
