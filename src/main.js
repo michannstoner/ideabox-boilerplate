@@ -5,6 +5,7 @@ var showStarredButton = document.querySelector('.show-starred');
 var errorButton = document.querySelector('.save-button-validation');
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
+var inputSearch = document.querySelector('#search-input')
 var saveButton = document.querySelector('.save-button');
 var showAllButton = document.querySelector('.show-all');
 var starredContainer = document.querySelector('.starred-container');
@@ -28,6 +29,10 @@ saveButton.addEventListener('click', logActivity);
 
 window.addEventListener('load', function(event) {
   displayCards(event);
+});
+
+inputSearch.addEventListener('input', function(event) {
+  filterIdeas(event);
 });
 
 function createCard() {
@@ -166,3 +171,40 @@ function hide(element) {
   element.classList.add('visibility-hidden');
 };
 
+function findIdeaIndex(id) {
+  for (var i = 0; i < loggedIdea.length; i++) {
+    if (parseInt(loggedIdea[i].id === parseInt(id))){
+      return i;
+    }
+  }
+};
+
+function filterIdeas(event) {
+  var matchingHTML = '';
+  var searchTerm = event.target.value;
+  for (var i = 0; i < loggedIdea.length; i++) {
+      if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+        cardContainer.innerHTML = '';
+        matchingHTML += `
+        <article class="card-container" id=${loggedIdea[i].id}>
+        <div class="card-header">
+          <img src="./assets/star.svg" class="star-inactive">
+          <img src="./assets/delete.svg" class="card-delete">
+        </div>
+        <div class="body-container">
+          <h2>${loggedIdea[i].title}</h2>
+          <p class="card-body">${loggedIdea[i].body}</p>
+        </div>
+        <div class="comment-container">
+          <img src="./assets/comment.svg" class="comment-img">
+          <p class="comment-tag">Comment</p>
+        </div>
+      </article>
+      `
+      }
+    
+  }
+  if (matchingHTML.length) {
+    cardContainer.innerHTML = matchingHTML;
+  } 
+}
