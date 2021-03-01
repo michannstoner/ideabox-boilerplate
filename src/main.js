@@ -53,8 +53,8 @@ function createCard() {
   var userTitle = formTitle.value;
   var userBody = formBody.value;
   var newCard = new Idea(userTitle, userBody);
-  var checkTitle = formValidation(userTitle);
-  var checkBody = formValidation(userBody);
+  var checkTitle = validateInput(userTitle);
+  var checkBody = validateInput(userBody);
 
   if (checkTitle || checkBody) {
     loggedIdea.push(newCard);
@@ -112,20 +112,6 @@ function cardTemplate(element) {
         </div>
       </article>
   `
-};
-
-function formValidation(formInput) {
-  var confirmValid = false;
-       
-  if (formInput === "") {
-    hide(validSaveButton);
-    show(inactiveSaveButton);
-  } else {
-    hide(inactiveSaveButton);
-    show(validSaveButton);
-    confirmValid = true;
-  }
-  return confirmValid;
 };
 
 function validateInput(userInput) {
@@ -200,6 +186,14 @@ function viewStarredIdea() {
   show(starredContainer);
 };
 
+function show(element) {
+  element.classList.remove('visibility-hidden');
+};
+
+function hide(element) {
+  element.classList.add('visibility-hidden');
+};
+
 function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
@@ -242,10 +236,3 @@ function inactiveDelete(event) {
   }
 };
 
-function show(element) {
-  element.classList.remove('visibility-hidden');
-};
-
-function hide(element) {
-  element.classList.add('visibility-hidden');
-};
