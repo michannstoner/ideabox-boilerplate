@@ -156,7 +156,8 @@ label {
   padding-right: 17px;
 }
 
-.card-placement {
+.card-placement, 
+.search-card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
