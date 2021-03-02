@@ -1,8 +1,6 @@
 var loggedIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
-var showStarredButton = document.querySelector('.show-starred');
-var errorButton = document.querySelector('.save-button-validation');
 var formContainer = document.querySelector('.form-container')
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
@@ -28,9 +26,7 @@ showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
 });
-inputSearch.addEventListener('input', function(event) {
-  filterIdeas(event);
-});
+
 validSaveButton.addEventListener('click', logActivity);
 
 showAllButton.addEventListener('click', function(event) {
@@ -42,13 +38,6 @@ showAllButton.addEventListener('click', function(event) {
   hide(starredContainer)
 })
 
-errorButton.addEventListener('click', logActivity);
-
-saveButton.addEventListener('click', logActivity);
-
-window.addEventListener('load', function(event) {
-  displayCards(event);
-  retrieveStarred();
 inactiveSaveButton.addEventListener('click', function(event) {
   event.preventDefault();
 });
@@ -109,14 +98,6 @@ function updateIdeaArray(event) {
   }
 };
 
-function retrieveStarred (event) {
-  if (storeStar()) {
-    logActivity();
-    retrieveActivities();
-  }
-  displayCards();
-}
-
 function cardTemplate(element) {
   cardContainer.innerHTML += `
       <article class="card-container" id=${element.id}>
@@ -169,35 +150,44 @@ function deleteCard(event) {
 
   if (event.target.classList.contains('card-delete')) {
     event.target.closest('.card-container').remove();
-    for (var i = 0; i < loggedIdea.length; i++) {
-      if (parseInt(cardToDelete.id) === parseInt(loggedIdea[i].id)) {
-        loggedIdea.splice(i, 1);
+    for (var i = 0; i < loggedIdeas.length; i++) {
+      if (parseInt(cardToDelete.id) === parseInt(loggedIdeas[i].id)) {
+        loggedIdeas.splice(i, 1);
       }
     }
   }
-  var localActivity = JSON.stringify(loggedIdea);
+  var localActivity = JSON.stringify(loggedIdeas);
   localStorage.setItem('storedActivities', localActivity);
   updateIdeaArray(event);
 };
 
-function starImage(event) {
-  var ideaId = event.target.parentElement.parentElement.id;
-  
-  if (event.target.classList.contains("star-inactive")) {
+function getIdeaID(event) {
+  // var ideaId = event.target.parentElement.parentElement.id;
+  // var retrievedStorage = retrieveActivities(event);
+  // logActivity(event);
+  // return ideaId;
+}
+
+function starImage(isStarred, event) {
+  if (isStarred) {
     event.target.src = "./assets/star-active.svg";
   } else {
-    event.target.src = "./assets/star.svg";
+    event.target.src = "./assets/star.svg"
   }  
-  return ideaId;
+  
 };
 
 function storeStar(event) {
-  var starID = starImage(event);
+  var starID = getIdeaID(event);
   for (var i = 0; i < loggedIdeas.length; i++) {
     if (parseInt(starID) === loggedIdeas[i].id) {
-      loggedIdeas[i].isStarred = true;
+      loggedIdeas[i].isStarred = !loggedIdeas[i].isStarred; 
+      starImage(loggedIdeas[i].isStarred, event)
+      //grab idea from local storage 
+      //update idea isStarred
+      //save back to local storage
     }
-  }
+  } 
 };
 
 function viewStarredIdea() {
@@ -243,18 +233,18 @@ function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
 
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (loggedIdeas[i].title.includes(searchTerm) || loggedIdeas[i].body.includes(searchTerm)) {
       cardContainer.innerHTML = '';
       matchingHTML += `
-      <article class="card-container" id=${loggedIdea[i].id}>
+      <article class="card-container" id=${loggedIdeas[i].id}>
       <div class="card-header">
         <img src="./assets/star.svg" class="star-inactive">
         <img src="./assets/delete.svg" class="card-delete">
       </div>
       <div class="body-container">
-        <h2>${loggedIdea[i].title}</h2>
-        <p class="card-body">${loggedIdea[i].body}</p>
+        <h2>${loggedIdeas[i].title}</h2>
+        <p class="card-body">${loggedIdeas[i].body}</p>
       </div>
       <div class="comment-container">
         <img src="./assets/comment.svg" class="comment-img">
