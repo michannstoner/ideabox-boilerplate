@@ -11,7 +11,7 @@ Have a really great idea but can't keep track of all of them in your brain?! Ide
 - Favorite your best ones, or delete your not-so-great ones.
 - Filter through saved ideas, or view all at once! 
 
-<img src="https://user-images.githubusercontent.com/76269802/109744688-f53eb780-7b8f-11eb-8cab-db8994fa96c9.png")
+<img alt="idea-box" src="https://user-images.githubusercontent.com/76269802/109745249-d12fa600-7b90-11eb-9ca8-3be3d2b59578.png">
 
 ## Setup
 - Fork this project to your own Github account
