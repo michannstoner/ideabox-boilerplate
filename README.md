@@ -1,15 +1,26 @@
 # Ideabox Group Project
 
-Every developer has more ideas than time. As David Allen likes to say "the human brain is for creating ideas, not remembering them." In this project, we'll be building an application that records and archives our ideas (good and bad alike).
+Create, display, record and archive idea cards.
 
-Throughout the project, one of our focuses will be on providing a fluid and responsive client-side interface. To this end, we'll rely on JavaScript to implement snappy filtering in the browser, and `localStorage` to persist our wonderful ideas between sessions.
+## Description
+Have a really great idea but can't keep track of all of them in your brain?! Idea Box is an application to help you get your best ideas out of your head and into handy idea cards to reference later. 
 
-## Learning Goals
+**How it works**
+- Create an idea card by filling out the title and body input.
+- Click the save button to store your idea.
+- Favorite your best ones, or delete your not-so-best ones.
+- Filter through saved ideas, or view all at once! 
 
-* Gain an understanding of how to write clean HTML and CSS to match a provided comp
-* Understand how to implement client-side data persistence using `localStorage`
-* Understand what it looks like to have a separate data model (using a class) and DOM model
-* Incorporate & iterate over arrays in order to filter what is being displayed
-* Craft code with clean style, using small functions that show trends toward DRYness and SRP
+## Setup
+- Fork this project to your own Github account
+- Clone the repository to your local machine
+- `cd` into the project
+- `open index.html` to open GitHub pages
 
-The project spec & rubric can be found [here](https://frontend.turing.io/projects/module-1/ideabox-group.html)
+## Github Pages
+[click me](https://daomeow.github.io/ideabox-boilerplate/) to deploy!
+  
+## Authors
+Michann Stoner [@michannstoner](https://github.com/michannstoner)
+Melanie Daoheuang [@daomeow](https://github.com/daomeow) (edited) 
+
