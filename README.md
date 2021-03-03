@@ -8,7 +8,7 @@ Have a really great idea but can't keep track of all of them in your brain?! Ide
 **How it works**
 - Create an idea card by filling out the title and body input.
 - Click the save button to store your idea.
-- Favorite your best ones, or delete your not-so-best ones.
+- Favorite your best ones, or delete your not-so-great ones.
 - Filter through saved ideas, or view all at once! 
 
 ## Setup
@@ -18,9 +18,9 @@ Have a really great idea but can't keep track of all of them in your brain?! Ide
 - `open index.html` to open GitHub pages
 
 ## Github Pages
-[click me](https://daomeow.github.io/ideabox-boilerplate/) to deploy!
+[Click me](https://daomeow.github.io/ideabox-boilerplate/) to deploy!
   
 ## Authors
 Michann Stoner [@michannstoner](https://github.com/michannstoner)
-Melanie Daoheuang [@daomeow](https://github.com/daomeow) (edited) 
+Melanie Daoheuang [@daomeow](https://github.com/daomeow) 
 
