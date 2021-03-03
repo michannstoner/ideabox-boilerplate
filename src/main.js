@@ -1,6 +1,7 @@
-var loggedIdea = [];
+var loggedIdeas = [];
 
 var cardContainer = document.querySelector('.card-placement');
+var formContainer = document.querySelector('.form-container')
 var formBody = document.querySelector('.input-body');
 var formTitle = document.querySelector('.input-title');
 var inputSearch = document.querySelector('#search-input')
@@ -9,7 +10,6 @@ var showAllButton = document.querySelector('.show-all');
 var showStarredButton = document.querySelector('.show-starred');
 var starredContainer = document.querySelector('.starred-container');
 var validSaveButton = document.querySelector('.save-button-validation');
-
 var searchContainer = document.querySelector('.search-card-container');
 
 window.addEventListener('load', function(event) {
@@ -26,6 +26,14 @@ formBody.addEventListener('keyup', updateSaveButton);
 showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
+});
+showAllButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  show(formContainer);
+  show(cardContainer)
+  show(showStarredButton);
+  hide(showAllButton);
+  hide(starredContainer)
 });
 inputSearch.addEventListener('keyup', function(event) {
   filterIdeas(event);
@@ -49,17 +57,16 @@ function createCard() {
   var checkBody = validateInput(userBody);
 
   if (checkTitle || checkBody) {
-    loggedIdea.push(newCard);
+    loggedIdeas.push(newCard);
     cardTemplate(newCard, cardContainer);
   }
   clearForm();
-  return newCard;
 };
 
 function logActivity(event) {
   event.preventDefault();
-  // var newCard = createCard();
-  var localActivity = JSON.stringify(loggedIdea);
+  createCard();
+  var localActivity = JSON.stringify(loggedIdeas);
   localStorage.setItem('storedActivities', localActivity);
 };
 
@@ -83,8 +90,8 @@ function displayCards(event) {
 
 function updateIdeaArray(event) {
   if (Array.isArray(retrieveActivities(event))) {
-    var combinedArray = loggedIdea.concat(retrieveActivities(event));
-    loggedIdea = combinedArray;
+    var combinedArray = loggedIdeas.concat(retrieveActivities(event));
+    loggedIdeas = combinedArray;
   }
 };
 
@@ -140,41 +147,69 @@ function deleteCard(event) {
 
   if (event.target.classList.contains('card-delete')) {
     event.target.closest('.card-container').remove();
-    for (var i = 0; i < loggedIdea.length; i++) {
-      if (parseInt(cardToDelete.id) === parseInt(loggedIdea[i].id)) {
-        loggedIdea.splice(i, 1);
+    for (var i = 0; i < loggedIdeas.length; i++) {
+      if (parseInt(cardToDelete.id) === parseInt(loggedIdeas[i].id)) {
+        loggedIdeas.splice(i, 1);
       }
     }
   }
-  var localActivity = JSON.stringify(loggedIdea);
+  var localActivity = JSON.stringify(loggedIdeas);
   localStorage.setItem('storedActivities', localActivity);
   updateIdeaArray(event);
 };
 
-function starImage(event) {
+function getIdeaID(event) {
   var ideaId = event.target.parentElement.parentElement.id;
   
-  if (event.target.classList.contains("star-inactive")) {
-    event.target.src = "./assets/star-active.svg";
-  } else {
-    event.target.src = "./assets/star.svg";
-  }  
   return ideaId;
 };
 
+function starImage(isStarred, event) {
+  if (isStarred) {
+    event.target.src = "./assets/star-active.svg";
+  } else {
+    event.target.src = "./assets/star.svg"
+  }  
+};
+
 function storeStar(event) {
-  var starID = starImage(event);
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (parseInt(starID) === loggedIdea[i].id) {
-      loggedIdea[i].isStarred = true;
+  var starID = getIdeaID(event);
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (parseInt(starID) === loggedIdeas[i].id) {
+      loggedIdeas[i].isStarred = !loggedIdeas[i].isStarred; 
+      starImage(loggedIdeas[i].isStarred, event)
     }
-  }
+  } 
+  logActivity(event);
 };
 
 function viewStarredIdea() {
-// conditional for loggedIdea[i].isStarred === true 
-// may be able to use cardTemp to display 
+  var storedIdeas = '';
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (loggedIdeas[i].isStarred === true) {
+      
+      storedIdeas += `
+       <article class="card-container" id=${loggedIdeas[i].id}>
+       <div class="card-header">
+         <img src="./assets/star.svg" class="star-inactive">
+         <img src="./assets/delete.svg" class="card-delete">
+       </div>
+       <div class="body-container">
+         <h2>${loggedIdeas[i].title}</h2>
+        <p class="card-body">${loggedIdeas[i].body}</p>
+       </div>
+       <div class="comment-container">
+         <img src="./assets/comment.svg" class="comment-img">
+         <p class="comment-tag">Comment</p>
+       </div>
+     </article>
+     `
+    } 
+  };
+
+  starredContainer.innerHTML = storedIdeas;
   hide(showStarredButton);
+  hide(formContainer);
   hide(cardContainer);
   show(showAllButton);
   show(starredContainer);
@@ -192,18 +227,18 @@ function filterIdeas(event) {
   var matchingHTML = '';
   var searchTerm = event.target.value;
 
-  for (var i = 0; i < loggedIdea.length; i++) {
-    if (loggedIdea[i].title.includes(searchTerm) || loggedIdea[i].body.includes(searchTerm)) {
+  for (var i = 0; i < loggedIdeas.length; i++) {
+    if (loggedIdeas[i].title.includes(searchTerm) || loggedIdeas[i].body.includes(searchTerm)) {
       cardContainer.innerHTML = '';
       matchingHTML += `
-      <article class="card-container" id=${loggedIdea[i].id}>
+      <article class="card-container" id=${loggedIdeas[i].id}>
       <div class="card-header">
         <img src="./assets/star.svg" class="star-inactive">
         <img src="./assets/delete.svg" class="card-delete">
       </div>
       <div class="body-container">
-        <h2>${loggedIdea[i].title}</h2>
-        <p class="card-body">${loggedIdea[i].body}</p>
+        <h2>${loggedIdeas[i].title}</h2>
+        <p class="card-body">${loggedIdeas[i].body}</p>
       </div>
       <div class="comment-container">
         <img src="./assets/comment.svg" class="comment-img">
@@ -212,7 +247,7 @@ function filterIdeas(event) {
     </article>
     `
     } 
-  }
+  };
 
   if (matchingHTML.length) {
     cardContainer.innerHTML = matchingHTML;
