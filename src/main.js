@@ -58,7 +58,7 @@ function createCard() {
 
 function logActivity(event) {
   event.preventDefault();
-  var newCard = createCard();
+  // var newCard = createCard();
   var localActivity = JSON.stringify(loggedIdea);
   localStorage.setItem('storedActivities', localActivity);
 };
@@ -187,26 +187,6 @@ function show(element) {
 function hide(element) {
   element.classList.add('visibility-hidden');
 };
-
-// function filterIdeas(event) {
-//   var searchInput = event.target.value;
-//   var emptyArray = [];
-//   // var userInfo = retrieveActivities(event);
-//   for (var i = 0; i < loggedIdea.length; i++) {
-//     if ((loggedIdea[i].title.includes(searchInput) || loggedIdea[i].body.includes(searchInput)) &&
-//       searchInput !== "")
-//     {
-//       cardTemplate(loggedIdea[i], searchContainer);
-//       hide(cardContainer);
-//       show(searchContainer);
-//       // return true;
-//     } else {
-//       show(cardContainer);
-//       hide(searchContainer);
-//     } 
-//   }
-// };
-
 
 function filterIdeas(event) {
   var matchingHTML = '';
