@@ -74,9 +74,10 @@ function logActivity(event) {
 };
 
 function retrieveActivities(event) {
-  event.preventDefault();
+  // event.preventDefault();
   var retrieveActivity = localStorage.getItem('storedActivities');
   var userActivityList = JSON.parse(retrieveActivity);
+  console.log('log', userActivityList);
   return userActivityList; 
 };
 
@@ -93,9 +94,12 @@ function displayCards(event) {
 };
 
 function updateIdeaArray(event) {
+  // console.log('number 2', userActivityList);
   if (Array.isArray(retrieveActivities(event))) {
     loggedIdeas.concat(retrieveActivities(event));
+    console.log('another log', loggedIdeas);
   }
+  //write a for loop for useractivitylist.length, then push index into logged ideas array 
 };
 
 function cardTemplate(element) {
@@ -162,10 +166,10 @@ function deleteCard(event) {
 };
 
 function getIdeaID(event) {
-  // var ideaId = event.target.parentElement.parentElement.id;
-  // var retrievedStorage = retrieveActivities(event);
-  // logActivity(event);
-  // return ideaId;
+  var ideaId = event.target.parentElement.parentElement.id;
+  
+  
+  return ideaId;
 }
 
 function starImage(isStarred, event) {
@@ -188,6 +192,7 @@ function storeStar(event) {
       //save back to local storage
     }
   } 
+  logActivity(event);
 };
 
 function viewStarredIdea() {
