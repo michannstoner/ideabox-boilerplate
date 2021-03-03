@@ -22,5 +22,6 @@ Have a really great idea but can't keep track of all of them in your brain?! Ide
   
 ## Authors
 Michann Stoner [@michannstoner](https://github.com/michannstoner)
+
 Melanie Daoheuang [@daomeow](https://github.com/daomeow) 
 
