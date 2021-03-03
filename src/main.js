@@ -21,16 +21,12 @@ cardContainer.addEventListener('click', function(event) {
 cardContainer.addEventListener('click', function(event) {
   storeStar(event);
 });
-
 formTitle.addEventListener('keyup', updateSaveButton);
-
 formBody.addEventListener('keyup', updateSaveButton);
-
 showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
 });
-
 showAllButton.addEventListener('click', function(event) {
   event.preventDefault();
   show(formContainer);
@@ -65,23 +61,19 @@ function createCard() {
     cardTemplate(newCard, cardContainer);
   }
   clearForm();
-  return newCard;
 };
 
 function logActivity(event) {
   event.preventDefault();
   createCard();
   var localActivity = JSON.stringify(loggedIdeas);
-  // // var newCard = createCard();
-  // var localActivity = JSON.stringify(loggedIdea);
   localStorage.setItem('storedActivities', localActivity);
 };
 
 function retrieveActivities(event) {
-  // event.preventDefault();
+  event.preventDefault();
   var retrieveActivity = localStorage.getItem('storedActivities');
   var userActivityList = JSON.parse(retrieveActivity);
-  console.log('log', userActivityList);
   return userActivityList; 
 };
 
@@ -97,12 +89,10 @@ function displayCards(event) {
 };
 
 function updateIdeaArray(event) {
-  // console.log('number 2', userActivityList);
   if (Array.isArray(retrieveActivities(event))) {
     var combinedArray = loggedIdeas.concat(retrieveActivities(event));
     loggedIdeas = combinedArray;
   }
-  //write a for loop for useractivitylist.length, then push index into logged ideas array 
 };
 
 function cardTemplate(element, htmlContainer) {
@@ -171,9 +161,8 @@ function deleteCard(event) {
 function getIdeaID(event) {
   var ideaId = event.target.parentElement.parentElement.id;
   
-  
   return ideaId;
-}
+};
 
 function starImage(isStarred, event) {
   if (isStarred) {
@@ -181,7 +170,6 @@ function starImage(isStarred, event) {
   } else {
     event.target.src = "./assets/star.svg"
   }  
-  
 };
 
 function storeStar(event) {
@@ -190,9 +178,6 @@ function storeStar(event) {
     if (parseInt(starID) === loggedIdeas[i].id) {
       loggedIdeas[i].isStarred = !loggedIdeas[i].isStarred; 
       starImage(loggedIdeas[i].isStarred, event)
-      //grab idea from local storage 
-      //update idea isStarred
-      //save back to local storage
     }
   } 
   logActivity(event);
@@ -220,7 +205,8 @@ function viewStarredIdea() {
      </article>
      `
     } 
-  }
+  };
+
   starredContainer.innerHTML = storedIdeas;
   hide(showStarredButton);
   hide(formContainer);
@@ -261,7 +247,7 @@ function filterIdeas(event) {
     </article>
     `
     } 
-  }
+  };
 
   if (matchingHTML.length) {
     cardContainer.innerHTML = matchingHTML;
