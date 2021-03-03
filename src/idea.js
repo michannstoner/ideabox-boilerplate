@@ -6,12 +6,6 @@ class Idea {
     this.isStarred = false;
   };
 
-  saveToStorage() {
-  };
-
-  deleteFromStorage() {
-  };
-
   updateIdea(validateClick) {
     if (validateClick) {
     this.iSStarred = true;

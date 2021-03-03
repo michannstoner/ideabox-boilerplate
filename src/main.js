@@ -10,6 +10,8 @@ var showStarredButton = document.querySelector('.show-starred');
 var starredContainer = document.querySelector('.starred-container');
 var validSaveButton = document.querySelector('.save-button-validation');
 
+var searchContainer = document.querySelector('.search-card-container');
+
 window.addEventListener('load', function(event) {
   displayCards(event);
 });
@@ -25,11 +27,10 @@ showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
 });
-inputSearch.addEventListener('input', function(event) {
+inputSearch.addEventListener('keyup', function(event) {
   filterIdeas(event);
 });
 validSaveButton.addEventListener('click', logActivity);
-
 inactiveSaveButton.addEventListener('click', function(event) {
   event.preventDefault();
 });
@@ -38,10 +39,6 @@ cardContainer.addEventListener('mouseover', function(event) {
 });
 cardContainer.addEventListener('mouseout', function(event) {
   inactiveDelete(event);
-});
-
-inputSearch.addEventListener('input', function(event) {
-  filterIdeas(event);
 });
 
 function createCard() {
@@ -53,14 +50,15 @@ function createCard() {
 
   if (checkTitle || checkBody) {
     loggedIdea.push(newCard);
-    cardTemplate(newCard);
+    cardTemplate(newCard, cardContainer);
   }
   clearForm();
+  return newCard;
 };
 
 function logActivity(event) {
   event.preventDefault();
-  createCard();
+  // var newCard = createCard();
   var localActivity = JSON.stringify(loggedIdea);
   localStorage.setItem('storedActivities', localActivity);
 };
@@ -74,24 +72,24 @@ function retrieveActivities(event) {
 
 function displayCards(event) {
   var userInfo = retrieveActivities(event);
-  var updateArray = updateIdeaArray(event);
-  
+  updateIdeaArray(event);
   if (userInfo) {
     for (var i = 0; i < userInfo.length; i++) {
-      cardTemplate(userInfo[i]);
+      cardTemplate(userInfo[i], cardContainer);
     }
   }
-  return updateArray;
+  return userInfo;
 };
 
 function updateIdeaArray(event) {
   if (Array.isArray(retrieveActivities(event))) {
-    loggedIdea.concat(retrieveActivities(event));
+    var combinedArray = loggedIdea.concat(retrieveActivities(event));
+    loggedIdea = combinedArray;
   }
 };
 
-function cardTemplate(element) {
-  cardContainer.innerHTML += `
+function cardTemplate(element, htmlContainer) {
+  htmlContainer.innerHTML += `
       <article class="card-container" id=${element.id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
