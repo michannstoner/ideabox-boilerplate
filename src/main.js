@@ -10,6 +10,7 @@ var showAllButton = document.querySelector('.show-all');
 var showStarredButton = document.querySelector('.show-starred');
 var starredContainer = document.querySelector('.starred-container');
 var validSaveButton = document.querySelector('.save-button-validation');
+var searchContainer = document.querySelector('.search-card-container');
 
 window.addEventListener('load', function(event) {
   displayCards(event);
@@ -20,14 +21,15 @@ cardContainer.addEventListener('click', function(event) {
 cardContainer.addEventListener('click', function(event) {
   storeStar(event);
 });
+
 formTitle.addEventListener('keyup', updateSaveButton);
+
 formBody.addEventListener('keyup', updateSaveButton);
+
 showStarredButton.addEventListener('click',function(event) {
   event.preventDefault();
   viewStarredIdea();
 });
-
-validSaveButton.addEventListener('click', logActivity);
 
 showAllButton.addEventListener('click', function(event) {
   event.preventDefault();
@@ -36,8 +38,11 @@ showAllButton.addEventListener('click', function(event) {
   show(showStarredButton);
   hide(showAllButton);
   hide(starredContainer)
-})
-
+});
+inputSearch.addEventListener('keyup', function(event) {
+  filterIdeas(event);
+});
+validSaveButton.addEventListener('click', logActivity);
 inactiveSaveButton.addEventListener('click', function(event) {
   event.preventDefault();
 });
@@ -46,10 +51,6 @@ cardContainer.addEventListener('mouseover', function(event) {
 });
 cardContainer.addEventListener('mouseout', function(event) {
   inactiveDelete(event);
-});
-
-inputSearch.addEventListener('input', function(event) {
-  filterIdeas(event);
 });
 
 function createCard() {
@@ -61,15 +62,18 @@ function createCard() {
 
   if (checkTitle || checkBody) {
     loggedIdeas.push(newCard);
-    cardTemplate(newCard);
+    cardTemplate(newCard, cardContainer);
   }
   clearForm();
+  return newCard;
 };
 
 function logActivity(event) {
   event.preventDefault();
   createCard();
   var localActivity = JSON.stringify(loggedIdeas);
+  // // var newCard = createCard();
+  // var localActivity = JSON.stringify(loggedIdea);
   localStorage.setItem('storedActivities', localActivity);
 };
 
@@ -83,27 +87,26 @@ function retrieveActivities(event) {
 
 function displayCards(event) {
   var userInfo = retrieveActivities(event);
-  var updateArray = updateIdeaArray(event);
-  
+  updateIdeaArray(event);
   if (userInfo) {
     for (var i = 0; i < userInfo.length; i++) {
-      cardTemplate(userInfo[i]);
+      cardTemplate(userInfo[i], cardContainer);
     }
   }
-  return updateArray;
+  return userInfo;
 };
 
 function updateIdeaArray(event) {
   // console.log('number 2', userActivityList);
   if (Array.isArray(retrieveActivities(event))) {
-    loggedIdeas.concat(retrieveActivities(event));
-    console.log('another log', loggedIdeas);
+    var combinedArray = loggedIdeas.concat(retrieveActivities(event));
+    loggedIdeas = combinedArray;
   }
   //write a for loop for useractivitylist.length, then push index into logged ideas array 
 };
 
-function cardTemplate(element) {
-  cardContainer.innerHTML += `
+function cardTemplate(element, htmlContainer) {
+  htmlContainer.innerHTML += `
       <article class="card-container" id=${element.id}>
         <div class="card-header">
           <img src="./assets/star.svg" class="star-inactive">
