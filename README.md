@@ -20,7 +20,7 @@ Have a really great idea but can't keep track of all of them in your brain?! Ide
 - `open index.html` to open GitHub pages
 
 ## Github Pages
-[Click me](https://daomeow.github.io/ideabox-boilerplate/) to deploy!
+[Click me](https://michannstoner.github.io/ideabox-boilerplate/.) to deploy!
   
 ## Authors
 Michann Stoner [@michannstoner](https://github.com/michannstoner)
